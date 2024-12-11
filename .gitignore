@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+Mtb.Expression.Gene.Data.RPKM.csv
+Mtb.Expression.Gene.Data.SCALED.RPKM.csv
+Mtb.Expression.Gene.Data.SCALED.ReadsM.csv
+Mtb.Expression.Gene.Data.SCALED.TPM.csv
+Mtb.Expression.Gene.Data.ReadsM.csv
+Mtb.Expression.Gene.Data.TPM.csv
+Pipeline.Summary.Details.csv
+Sputum_Correlations_Figures

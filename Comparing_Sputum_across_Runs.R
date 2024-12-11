@@ -38,7 +38,7 @@ Sept_tpm_RunSubset <- Sept_tpm %>%
   select(S_575533_Probe_3A, S_687338_Probe_4A_100, S_503557_Probe_3D_10, S_250754_Probe_4A_50)
 
 # Merge the dataframes
-multiRun_tpm <- merge(my_tpm_RunSubset, Sept_tpm_RunSubset)
+multiRun_tpm <- merge(my_tpm_RunSubset, Sept_tpm_RunSubset, by = "row.names", all = T)
 
 ###########################################################
 ######################## S_503557 #########################

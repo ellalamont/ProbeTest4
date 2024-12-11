@@ -109,7 +109,9 @@ Sept_tpm <- Sept_tpm[,-ncol(Sept_tpm)] # remove the last column which is the Und
 # names(my_tpm) <- gsub(x = names(my_tpm), pattern = "_2_2_ng_mL", replacement = "")
 names(Sept_tpm) <- gsub(x = names(Sept_tpm), pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
 
-
+# add rownames to the tpm and metadata dataframes
+rownames(Sept_tpm) <- Sept_tpm[,1] # add the rownames
+Sept_tpm <- Sept_tpm[,-1] # Remove the old column of rownames
 
 
 # BELOW NOT DONE AS OF 12/10/24
