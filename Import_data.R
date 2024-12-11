@@ -45,7 +45,7 @@ c16 <- c("dodgerblue2", "#E31A1C", "green4", "#6A3D9A", "#FF7F00", "black","gold
 c11 <- c("dodgerblue2", "#E31A1C", "green4", "#6A3D9A", "palegreen2", "gold1", "maroon", "orchid1", "darkturquoise", "darkorange4", "gray70")
 c7 <- c("gray70", "#E0F7FA", "#B2EBF2", "#81D4FA", "#03A9F4","#0288D1", "#01579B")
 c8 <- c("dodgerblue2", "#E31A1C", "green4", "#6A3D9A", "palegreen2", "gray70", "maroon", "black")
-c7_2 <- c("#B2EBF2", "#81D4FA", "#03A9F4", "#0288D1", "#01579B")
+Orange_Gradient <- c("#FFD4A3", "#FFA64D", "#FF7F00", "#E66900", "#993D00")
 
 # Stop scientific notation
 options(scipen = 999) 
@@ -95,6 +95,22 @@ rownames(my_tpm) <- my_tpm[,1] # add the rownames
 my_tpm <- my_tpm[,-1] # Remove the old column of rownames
 rownames(my_metadata) <- my_metadata[,1] # add the rownames
 # my_metadata <- my_metadata[,-1] # Remove the old column of rownames
+
+
+
+###########################################################
+################ IMPORT SEPT_Seq TPM VALUES ###############
+
+Sept_tpm <- read.csv("/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv")
+
+Sept_tpm <- Sept_tpm[,-ncol(Sept_tpm)] # remove the last column which is the Undetermined
+
+# Adjust the names so they are slightly shorter
+# names(my_tpm) <- gsub(x = names(my_tpm), pattern = "_2_2_ng_mL", replacement = "")
+names(Sept_tpm) <- gsub(x = names(Sept_tpm), pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
+
+
+
 
 # BELOW NOT DONE AS OF 12/10/24
 
