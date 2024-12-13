@@ -21,7 +21,7 @@ my_plot_themes <- theme_bw() +
 
 
 ###########################################################
-######### THP1_1e6_1 to 5 NUMBER+PERCENT READS #########
+######### F: THP1_1e6_1 to 5 NUMBER+PERCENT READS #########
 # Numbers 1-4 were pooled, 5 was not, everything else the same
 
 # Number Reads

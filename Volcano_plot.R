@@ -62,7 +62,7 @@ make_volcano_function <- function(my_df, graph_title) {
 test <- make_volcano_function(list_dfs_2[[23]], df_names[23])
 test <- make_volcano_function(list_dfs_2[["THP1_1e6_3_ComparedTo_THP1_1e6_5"]], df_names["THP1_1e6_3_ComparedTo_THP1_1e6_5"])
 test
-ggplotly(test)
+# ggplotly(test)
 
 
 

@@ -30,6 +30,8 @@ my_plot_themes <- theme_bw() +
 
 # http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2
 
+##### D
+ 
 ###########################################################
 ################### D: LOG10 GGCORRPLOT ###################
 # Only going to do Pearson because the number of genes is so high CLT applies and parametric tests can be used
@@ -103,20 +105,76 @@ ggsave(orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA,
        width = 7, height = 5, units = "in")
 
 
-##########################################################################################
-############### D: orginalTHP1_1e6_2_MtbrRNA vs orginalTHP1_1e6_3_MtbrRNA ################
 
-orginalTHP1_1e6_2_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA <- my_tpm_Log10 %>% 
-  ggplot(aes(x = orginalTHP1_1e6_2_MtbrRNA, y = orginalTHP1_1e6_3_MtbrRNA)) + 
+
+
+##### F
+
+
+##########################################################################################
+##################################### F: LOG10 GGCORRPLOT ################################
+# Only going to do Pearson because the number of genes is so high CLT applies and parametric tests can be used
+
+# Samplese are 
+# THP1_1e6_1
+# THP1_1e6_2
+# THP1_1e6_3
+# THP1_1e6_4
+# THP1_1e6_5
+
+# Select the samples of interest
+Pool.F_Log10 <- my_tpm_Log10 %>%
+  select(THP1_1e6_1, THP1_1e6_2, THP1_1e6_3, THP1_1e6_4, THP1_1e6_5)
+
+# Make the correlation
+my_cor_pearson_Pool.F_Log10 <- cor(Pool.F_Log10, method = "pearson")
+
+min(my_cor_pearson_Pool.F_Log10) # 0.9848202
+
+# Plot pearson
+Pool.F_PearsonLog10 <- my_cor_pearson_Pool.F_Log10 %>% 
+  ggcorrplot(hc.order = FALSE, 
+             lab = TRUE, lab_size = 5,
+             type = c("full")) + 
+  scale_fill_gradient2(limit = c(0.98,1), low = "blue", high =  "red", mid = "white", midpoint = 0.99) + # Make sure to change based on the min!
+  my_plot_themes + 
+  scale_x_discrete(guide = guide_axis(angle = 45)) + 
+  labs(title = "F Pool: THP1 Pearson Correlation Log10 transformed", 
+       subtitle = "originalTHP1 spiked with 1e6 cells H37Ra, All full library prepped, MtbrRNADep \nSamples 1-4 were pooled", 
+       fill = "Correlation")
+Pool.F_PearsonLog10
+
+ggsave(Pool.F_PearsonLog10,
+       file = "Pool.F_PearsonLog10.pdf",
+       path = "Pooling_Figures",
+       width = 7, height = 6, units = "in")
+
+# F Scatter: THP1_1e6_1 vs THP1_1e6_2
+ScatterCorr_THP1_1e6_1_vs_THP1_1e6_2 <- my_tpm_Log10 %>% 
+  ggplot(aes(x = THP1_1e6_1, y = THP1_1e6_2)) + 
   geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
   labs(title = "THP1 with 1e6 cells H37Ra Pearson correlation",
-       subtitle = "orginalTHP1_1e6_3_MtbrRNA vs orginalTHP1_1e6_2_MtbrRNA; Half library prep",
-       x = "orginalTHP1_1e6_2_MtbrRNA Log10(TPM)", y = "orginalTHP1_1e6_3_MtbrRNA Log10(TPM)") + 
+       subtitle = "THP1_1e6_1 vs THP1_1e6_2; Full library prep",
+       x = "THP1_1e6_1 Log10(TPM)", y = "THP1_1e6_2 Log10(TPM)") + 
   stat_cor(method="pearson") + # add a correlation to the plot
   my_plot_themes
-orginalTHP1_1e6_2_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA
+ScatterCorr_THP1_1e6_1_vs_THP1_1e6_2
+ggsave(ScatterCorr_THP1_1e6_1_vs_THP1_1e6_2,
+       file = "ScatterCorr_THP1_1e6_1_vs_THP1_1e6_2.pdf",
+       path = "Pooling_Figures",
+       width = 7, height = 5, units = "in")
 
-ggsave(orginalTHP1_1e6_2_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA,
-       file = "orginalTHP1_1e6_2_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA.pdf",
+# F Scatter: THP1_1e6_1 vs THP1_1e6_5
+ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5 <- my_tpm_Log10 %>% 
+  ggplot(aes(x = THP1_1e6_1, y = THP1_1e6_5)) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = "THP1 with 1e6 cells H37Ra Pearson correlation",
+       subtitle = "THP1_1e6_1 vs THP1_1e6_5; Full library prep",
+       x = "THP1_1e6_1 Log10(TPM)", y = "THP1_1e6_5 Log10(TPM)") + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5
+ggsave(ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5,
+       file = "ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5.pdf",
        path = "Pooling_Figures",
        width = 7, height = 5, units = "in")

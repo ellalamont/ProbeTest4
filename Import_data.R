@@ -101,8 +101,8 @@ rownames(my_metadata) <- my_metadata[,1] # add the rownames
 ###########################################################
 ################ IMPORT SEPT_Seq TPM VALUES ###############
 
-# Sept_tpm <- read.csv("/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv")
-Sept_tpm <- read.csv("/Users/snork-maiden/Documents/Micro_grad_school/Sherman_Lab/R_projects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv")
+Sept_tpm <- read.csv("/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv")
+# Sept_tpm <- read.csv("/Users/snork-maiden/Documents/Micro_grad_school/Sherman_Lab/R_projects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv")
 
 Sept_tpm <- Sept_tpm[,-ncol(Sept_tpm)] # remove the last column which is the Undetermined
 
@@ -134,7 +134,6 @@ orginalTHP1_1e6_5_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim(
 orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_2_MtbrRNA/orginalTHP1_1e6_1_MtbrRNA_S28.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA/orginalTHP1_1e6_1_MtbrRNA_S28.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_2_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_2_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA/orginalTHP1_1e6_2_MtbrRNA_S29.MTb.Meta.JOINED.txt")
-# orginalTHP1_1e6_2_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_2_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA/orginalTHP1_1e6_2_MtbrRNA_S29.MTb.Meta.JOINED.txt")
 
 W0.S354850_DualrRNA_ComparedTo_W0.S354851_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.S_354850_DualrRNA_vs_S_354851_DualrRNA/S_354850_DualrRNA_S4.MTb.Meta.JOINED.txt")
 W0.S503557_DualrRNA_ComparedTo_W0.S503557 <- read.delim("JOINED_BobAverages/MTb.MetaResults.S_503557_vs_S_503557_DualrRNA/S_503557_DualrRNA_S1.MTb.Meta.JOINED.txt")
@@ -179,7 +178,6 @@ list_dfs <- list(newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA,
                  orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA,
                  orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA,
                  orginalTHP1_1e6_2_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA,
-                 # orginalTHP1_1e6_2_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA, #12
                  
                  W0.S354850_DualrRNA_ComparedTo_W0.S354851_DualrRNA,
                  W0.S503557_DualrRNA_ComparedTo_W0.S503557,
@@ -219,7 +217,6 @@ df_names <- c("newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA",
               "orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA",
               "orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA",
               "orginalTHP1_1e6_2_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA",
-              # "orginalTHP1_1e6_2_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA", #12
               
               "W0.S354850_DualrRNA_ComparedTo_W0.S354851_DualrRNA",
               "W0.S503557_DualrRNA_ComparedTo_W0.S503557",
