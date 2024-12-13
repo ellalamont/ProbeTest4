@@ -31,7 +31,7 @@ my_plot_themes <- theme_bw() +
 # http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2
 
 ###########################################################
-################ LOG10 GGCORRPLOT GROUP D #################
+################### D: LOG10 GGCORRPLOT ###################
 # Only going to do Pearson because the number of genes is so high CLT applies and parametric tests can be used
 
 # Samplese are 
@@ -67,7 +67,7 @@ ggsave(Pool.D_PearsonLog10,
        width = 7, height = 6, units = "in")
 
 ##########################################################################################
-############ SCATTER orginalTHP1_1e6_1_MtbrRNA vs orginalTHP1_1e6_2_MtbrRNA ##############
+############### D: orginalTHP1_1e6_1_MtbrRNA vs orginalTHP1_1e6_2_MtbrRNA ################
 
 orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_2_MtbrRNA <- my_tpm_Log10 %>% 
   ggplot(aes(x = orginalTHP1_1e6_1_MtbrRNA, y = orginalTHP1_1e6_2_MtbrRNA)) + 
@@ -84,10 +84,8 @@ ggsave(orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_2_MtbrRNA,
        path = "Pooling_Figures",
        width = 7, height = 5, units = "in")
 
-
-
 ##########################################################################################
-############ SCATTER orginalTHP1_1e6_1_MtbrRNA vs orginalTHP1_1e6_3_MtbrRNA ##############
+############### D: orginalTHP1_1e6_1_MtbrRNA vs orginalTHP1_1e6_3_MtbrRNA ################
 
 orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA <- my_tpm_Log10 %>% 
   ggplot(aes(x = orginalTHP1_1e6_1_MtbrRNA, y = orginalTHP1_1e6_3_MtbrRNA)) + 
@@ -105,10 +103,8 @@ ggsave(orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA,
        width = 7, height = 5, units = "in")
 
 
-
-
 ##########################################################################################
-############ SCATTER orginalTHP1_1e6_2_MtbrRNA vs orginalTHP1_1e6_3_MtbrRNA ##############
+############### D: orginalTHP1_1e6_2_MtbrRNA vs orginalTHP1_1e6_3_MtbrRNA ################
 
 orginalTHP1_1e6_2_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA <- my_tpm_Log10 %>% 
   ggplot(aes(x = orginalTHP1_1e6_2_MtbrRNA, y = orginalTHP1_1e6_3_MtbrRNA)) + 

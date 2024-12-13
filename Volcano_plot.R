@@ -64,7 +64,7 @@ make_volcano_function <- function(my_df, graph_title) {
 }
 
 # Check the function works
-test <- make_volcano_function(list_dfs_2[[1]], df_names[1])
+test <- make_volcano_function(list_dfs_2[[25]], df_names[25])
 test
 ggplotly(test)
 
@@ -93,14 +93,10 @@ for (i in 1:length(list_dfs_2)) {
 # Make sure to check what the warnings are... okay if they are just the geom_text_repel but make sure not data is being lost by defined axes!
 
 
-
-# NOT DONE BELOW
 ###########################################################
 ############### MAKE A SINGLE VOLCANO PLOT ################
 
-# Making the one volcano plot with the outlier removed for the EV 
-single_plot <- make_volcano_function(list_dfs_2[[9]], df_names[9])
-single_plot <- single_plot + labs(subtitle = "Outlier based on PCA plot (sample 1) removed")
+single_plot <- make_volcano_function(list_dfs_2[[25]], df_names[25])
 single_plot
 ggsave(single_plot,
        file = paste0(df_names[9], "OutlierRemoved_volcano.pdf"),
