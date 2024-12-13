@@ -39,11 +39,6 @@ make_volcano_function <- function(my_df, graph_title) {
     # scale_color_manual(values = c("#00AFBB", "grey", "#bb0c00")) + 
     scale_color_manual(values = c(`significant down` = "#00AFBB", `not significant` = "grey", `significant up` = "#bb0c00")) +
     
-    # Set these so all plots have the same axes
-    # scale_y_continuous(limits = c(-.1, 14), breaks = seq(0,14,2)) + 
-    # scale_x_continuous(limits = c(-12, 12), breaks = seq(-12,12,2)) + 
-    
-    # geom_text_repel(max.overlaps = Inf, size = 3) # Can do geom_text_repel or geom_label_rebel
     geom_text_repel(max.overlaps = 10, size = 3) # Can do geom_text_repel or geom_label_rebel
   
   # Determine the max and min axes values for labeling 
@@ -64,7 +59,8 @@ make_volcano_function <- function(my_df, graph_title) {
 }
 
 # Check the function works
-test <- make_volcano_function(list_dfs_2[[25]], df_names[25])
+test <- make_volcano_function(list_dfs_2[[23]], df_names[23])
+test <- make_volcano_function(list_dfs_2[["THP1_1e6_3_ComparedTo_THP1_1e6_5"]], df_names["THP1_1e6_3_ComparedTo_THP1_1e6_5"])
 test
 ggplotly(test)
 
