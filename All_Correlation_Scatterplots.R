@@ -68,6 +68,35 @@ for (i in 1:(length(colnames(my_tpm_Log10)) -1 -1)) {
 # This works but it obviously making a bunch that I don't need, will go through and delete, so don't rerun!!
 
 
+###########################################################
+############# TRY CHOOSING VIA VOLCANO NAMES ##############
+
+input_string <- "newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA"
+input_string <- "W0.S354850_DualrRNA_ComparedTo_W0.S354851_DualrRNA"
+
+# Split the string using "_ComparedTo_" as the delimiter
+samples <- strsplit(input_string, "_ComparedTo_")[[1]]
+
+# Function to clean the sample names
+clean_sample <- function(sample) {
+  # Remove the "W#." prefix and add an underscore between "S" and the number
+  gsub("W[0-9]+\\.", "", sample) %>%           # Remove the "W#."
+    gsub("S([0-9]+)", "S_\\1", .)              # Add underscore between "S" and the number
+}
+
+# Assign the two parts to separate variables
+sample1 <- clean_sample(samples[1])
+sample2 <- clean_sample(samples[2])
+
+
+
+
+
+
+
+
+
+
 
 
 
