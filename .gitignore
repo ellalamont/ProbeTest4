@@ -10,3 +10,12 @@ Mtb.Expression.Gene.Data.ReadsM.csv
 Mtb.Expression.Gene.Data.TPM.csv
 Pipeline.Summary.Details.csv
 Sputum_Correlations_Figures
+.DS_Store
+EukrRNADepletion_Figures
+JOINED_BobAverages
+LibraryPrep_Figures
+PCA_Figures
+Pooling_Figures
+Volcano_plot_figures
+HalfFullPrep_Figures
+All_Correlation_Scatter_Figures

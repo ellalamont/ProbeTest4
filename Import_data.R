@@ -173,6 +173,7 @@ W0.S250754_ComparedTo_W0.S250754_Probe_4A_50 <- read.delim("JOINED_BobAverages/D
 W0.S503557_ComparedTo_W0.S503557_Probe_3D_10 <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.S_503557_vs_S_503557_Probe_3D_10/S_503557_S46.MTb.Meta.JOINED.txt")
 W2.S575533_ComparedTo_W0.S575533_Probe_3A <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.S_575533_MtbrRNA_vs_S_575533_Probe_3A/S_575533_MtbrRNA_S39.MTb.Meta.JOINED.txt")
 THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25 <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.THP1_1e6_5_vs_THP1_1e6_3_Probe_3D_25/THP1_1e6_5_S45.MTb.Meta.JOINED.txt")
+THP1_1e6_3_ComparedTo_THP1_1e6_3_Probe_3D_25 <- read.delim("JOINED_BobAverages/MTb.MetaResults.THP1_1e6_3_vs_THP1_1e6_3_Probe_3D_25/THP1_1e6_3_S43.MTb.Meta.JOINED.txt")
 
 
 ###########################################################
@@ -214,7 +215,8 @@ list_dfs <- list(newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA,
                  W0.S250754_ComparedTo_W0.S250754_Probe_4A_50,
                  W0.S503557_ComparedTo_W0.S503557_Probe_3D_10,
                  W2.S575533_ComparedTo_W0.S575533_Probe_3A,
-                 THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25) 
+                 THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25,
+                 THP1_1e6_3_ComparedTo_THP1_1e6_3_Probe_3D_25) 
 
 # Make a list of all the names
 df_names <- c("newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA",
@@ -253,7 +255,8 @@ df_names <- c("newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA",
               "W0.S250754_ComparedTo_W0.S250754_Probe_4A_50",
               "W0.S503557_ComparedTo_W0.S503557_Probe_3D_10",
               "W2.S575533_ComparedTo_W0.S575533_Probe_3A",
-              "THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25" #31
+              "THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25", #31
+              "THP1_1e6_3_ComparedTo_THP1_1e6_3_Probe_3D_25"
   
 )
 
