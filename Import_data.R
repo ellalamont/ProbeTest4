@@ -101,8 +101,21 @@ rownames(my_metadata) <- my_metadata[,1] # add the rownames
 ###########################################################
 ################ IMPORT SEPT_Seq TPM VALUES ###############
 
-Sept_tpm <- read.csv("/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv")
+# Sept_tpm <- read.csv("/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv")
 # Sept_tpm <- read.csv("/Users/snork-maiden/Documents/Micro_grad_school/Sherman_Lab/R_projects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv")
+
+# A little complicated because I am working across two computers
+possible_paths <- c(
+  "/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv",
+  "/Users/snork-maiden/Documents/Micro_grad_school/Sherman_Lab/R_projects/Sputum/ProbeTest3/Mtb.Expression.Gene.Data.SCALED.TPM.csv"
+)
+# Find the first valid path
+file_path <- possible_paths[file.exists(possible_paths)][1]
+if (!is.null(file_path)) {
+  Sept_tpm <- read.csv(file_path)
+} else {
+  stop("File not found in any of the expected locations.")
+}
 
 Sept_tpm <- Sept_tpm[,-ncol(Sept_tpm)] # remove the last column which is the Undetermined
 

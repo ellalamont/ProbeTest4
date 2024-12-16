@@ -109,10 +109,8 @@ ggsave(orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA,
 
 
 ##### F
-
-
-##########################################################################################
-##################################### F: LOG10 GGCORRPLOT ################################
+###################################################################
+######################## F: LOG10 GGCORRPLOT ######################
 # Only going to do Pearson because the number of genes is so high CLT applies and parametric tests can be used
 
 # Samplese are 
@@ -178,3 +176,185 @@ ggsave(ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5,
        file = "ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5.pdf",
        path = "Pooling_Figures",
        width = 7, height = 5, units = "in")
+
+
+
+##### B
+###################################################################
+######################## B: LOG10 GGCORRPLOT ######################
+# Only going to do Pearson because the number of genes is so high CLT applies and parametric tests can be used
+
+# Samples are 
+# orginalTHP1_1e6_1_DualrRNA
+# originalTHP1_1e6_2_DualrRNA
+# originalTHP1_1e6_3_DualrRNA
+
+# Select the samples of interest
+Pool.B_Log10 <- my_tpm_Log10 %>%
+  select(orginalTHP1_1e6_1_DualrRNA, originalTHP1_1e6_2_DualrRNA, originalTHP1_1e6_3_DualrRNA)
+
+# Make the correlation
+my_cor_pearson_Pool.B_Log10 <- cor(Pool.B_Log10, method = "pearson")
+
+min(my_cor_pearson_Pool.B_Log10) # 0.8326534
+
+# Plot pearson
+Pool.B_PearsonLog10 <- my_cor_pearson_Pool.B_Log10 %>% 
+  ggcorrplot(hc.order = FALSE, 
+             lab = TRUE, lab_size = 5,
+             type = c("full")) + 
+  scale_fill_gradient2(limit = c(0.83,1), low = "blue", high =  "red", mid = "white", midpoint = 0.91) + # Make sure to change based on the min!
+  my_plot_themes + 
+  scale_x_discrete(guide = guide_axis(angle = 45)) + 
+  labs(title = "B Pool: THP1 Pearson Correlation Log10 transformed", 
+       subtitle = "originalTHP1 spiked with 1e6 cells H37Ra, All full library prepped, DualrRNADep \nSamples 2+3 were pooled", 
+       fill = "Correlation")
+Pool.B_PearsonLog10
+
+ggsave(Pool.B_PearsonLog10,
+       file = "Pool.B_PearsonLog10.pdf",
+       path = "Pooling_Figures",
+       width = 7, height = 6, units = "in")
+
+# B Scatter: orginalTHP1_1e6_1_DualrRNA vs originalTHP1_1e6_2_DualrRNA
+Sample1 <- "orginalTHP1_1e6_1_DualrRNA"
+Sample2 <- "originalTHP1_1e6_2_DualrRNA"
+ScatterCorr <- my_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = "THP1 with 1e6 cells H37Ra Pearson correlation",
+       subtitle = paste0(Sample1, " vs ", Sample2),
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "Pooling_Figures",
+       width = 7, height = 5, units = "in")
+
+# B Scatter: orginalTHP1_1e6_1_DualrRNA vs originalTHP1_1e6_3_DualrRNA
+Sample1 <- "orginalTHP1_1e6_1_DualrRNA"
+Sample2 <- "originalTHP1_1e6_3_DualrRNA"
+ScatterCorr <- my_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = "THP1 with 1e6 cells H37Ra Pearson correlation",
+       subtitle = paste0(Sample1, " vs ", Sample2),
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "Pooling_Figures",
+       width = 7, height = 5, units = "in")
+
+
+# B Scatter: originalTHP1_1e6_2_DualrRNA vs originalTHP1_1e6_3_DualrRNA
+Sample1 <- "originalTHP1_1e6_2_DualrRNA"
+Sample2 <- "originalTHP1_1e6_3_DualrRNA"
+ScatterCorr <- my_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = "THP1 with 1e6 cells H37Ra Pearson correlation",
+       subtitle = paste0(Sample1, " vs ", Sample2),
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "Pooling_Figures",
+       width = 7, height = 5, units = "in")
+
+
+##### C
+###################################################################
+######################## C: LOG10 GGCORRPLOT ######################
+# Only going to do Pearson because the number of genes is so high CLT applies and parametric tests can be used
+
+# Samples are 
+# originalTHP1_1e6_4_DualrRNA
+# originalTHP1_1e6_5_DualrRNA
+# originalTHP1_1e6_6_DualrRNA
+
+# Select the samples of interest
+Pool.C_Log10 <- my_tpm_Log10 %>%
+  select(originalTHP1_1e6_4_DualrRNA, originalTHP1_1e6_5_DualrRNA, originalTHP1_1e6_6_DualrRNA)
+
+# Make the correlation
+my_cor_pearson_Pool.C_Log10 <- cor(Pool.C_Log10, method = "pearson")
+min(my_cor_pearson_Pool.C_Log10) # 0.7788043
+
+# Plot pearson
+Pool.C_PearsonLog10 <- my_cor_pearson_Pool.C_Log10 %>% 
+  ggcorrplot(hc.order = FALSE, 
+             lab = TRUE, lab_size = 5,
+             type = c("full")) + 
+  scale_fill_gradient2(limit = c(0.77,1), low = "blue", high =  "red", mid = "white", midpoint = 0.88) + # Make sure to change based on the min!
+  my_plot_themes + 
+  scale_x_discrete(guide = guide_axis(angle = 45)) + 
+  labs(title = "C Pool: THP1 Pearson Correlation Log10 transformed", 
+       subtitle = "originalTHP1 spiked with 1e6 cells H37Ra, All half library prepped, DualrRNADep \nSamples 4+5 were pooled", 
+       fill = "Correlation")
+Pool.C_PearsonLog10
+ggsave(Pool.C_PearsonLog10,
+       file = "Pool.C_PearsonLog10.pdf",
+       path = "Pooling_Figures",
+       width = 7, height = 6, units = "in")
+
+# C Scatter: originalTHP1_1e6_4_DualrRNA vs originalTHP1_1e6_5_DualrRNA
+Sample1 <- "originalTHP1_1e6_4_DualrRNA"
+Sample2 <- "originalTHP1_1e6_5_DualrRNA"
+ScatterCorr <- my_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = "THP1 with 1e6 cells H37Ra Pearson correlation",
+       subtitle = paste0(Sample1, " vs ", Sample2),
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "Pooling_Figures",
+       width = 7, height = 5, units = "in")
+
+# C Scatter: originalTHP1_1e6_4_DualrRNA vs originalTHP1_1e6_6_DualrRNA
+Sample1 <- "originalTHP1_1e6_4_DualrRNA"
+Sample2 <- "originalTHP1_1e6_6_DualrRNA"
+ScatterCorr <- my_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = "THP1 with 1e6 cells H37Ra Pearson correlation",
+       subtitle = paste0(Sample1, " vs ", Sample2),
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "Pooling_Figures",
+       width = 7, height = 5, units = "in")
+
+# C Scatter: originalTHP1_1e6_4_DualrRNA vs originalTHP1_1e6_6_DualrRNA
+Sample1 <- "originalTHP1_1e6_5_DualrRNA"
+Sample2 <- "originalTHP1_1e6_6_DualrRNA"
+ScatterCorr <- my_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = "THP1 with 1e6 cells H37Ra Pearson correlation",
+       subtitle = paste0(Sample1, " vs ", Sample2),
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "Pooling_Figures",
+       width = 7, height = 5, units = "in")
+
+
+
+

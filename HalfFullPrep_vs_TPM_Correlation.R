@@ -31,8 +31,8 @@ my_plot_themes <- theme_bw() +
 # http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2
 
 
-##########################################################################################
-######################## orginalTHP1_1e6_3_MtbrRNA vs THP1_1e6_5 #########################
+###############################################################################
+############## orginalTHP1_1e6_3_MtbrRNA vs THP1_1e6_5 ########################
 # Neither sample was in a pool
 # Both samples are the original THP1 that were MtbrRNA depleted by JA and Melanie
 
