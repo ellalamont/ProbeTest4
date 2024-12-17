@@ -143,6 +143,7 @@ orginalTHP1_1e6_2_DualrRNA_ComparedTo_originalTHP1_1e6_3_DualrRNA <- read.delim(
 orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_5_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_4_DualrRNA_vs_originalTHP1_1e6_5_DualrRNA/originalTHP1_1e6_4_DualrRNA_S25.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_6_DualrRNA_vs_originalTHP1_1e6_4_DualrRNA/originalTHP1_1e6_4_DualrRNA_S25.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_5_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_6_DualrRNA_vs_originalTHP1_1e6_5_DualrRNA/originalTHP1_1e6_5_DualrRNA_S26.MTb.Meta.JOINED.txt")
+orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_DualrRNA_vs_originalTHP1_1e6_6_DualrRNA/orginalTHP1_1e6_1_DualrRNA_S22.MTb.Meta.JOINED.txt")
 
 orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_2_MtbrRNA/orginalTHP1_1e6_1_MtbrRNA_S28.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA/orginalTHP1_1e6_1_MtbrRNA_S28.MTb.Meta.JOINED.txt")
@@ -188,6 +189,7 @@ list_dfs <- list(newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA,
                  orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_5_DualrRNA,
                  orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA,
                  orginalTHP1_1e6_5_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA, #8
+                 orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA,
                  
                  orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA,
                  orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA,
@@ -228,6 +230,7 @@ df_names <- c("newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA",
               "orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_5_DualrRNA",
               "orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA",
               "orginalTHP1_1e6_5_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA", #8
+              "orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA",
               
               "orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA",
               "orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA",

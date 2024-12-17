@@ -93,10 +93,10 @@ for (i in 1:length(list_dfs_2)) {
 ############### MAKE A SINGLE VOLCANO PLOT ################
 
 my_path <- "Volcano_plot_figures"
-single_plot <- make_volcano_function(list_dfs_2[[32]], df_names[32])
+single_plot <- make_volcano_function(list_dfs_2[[9]], df_names[9])
 single_plot
 ggsave(single_plot,
-       file = paste0(df_names[32], ".pdf"),
+       file = paste0(df_names[9], ".pdf"),
        path = my_path,
        width = 7, height = 5, units = "in")
 
