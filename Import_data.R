@@ -73,6 +73,41 @@ my_pipeSummary <- my_pipeSummary[-nrow(my_pipeSummary), ] # Remove the undetermi
 
 my_pipeSummary$SampleID <- gsub(x = my_pipeSummary$SampleID, pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
 
+
+###########################################################
+############ IMPORT SEPT PIPELINE SUMMARY DATA ############
+
+# A little complicated because I am working across two computers
+possible_paths <- c(
+  "/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Pipeline.Summary.Details.csv",
+  "/Users/snork-maiden/Documents/Micro_grad_school/Sherman_Lab/R_projects/Sputum/ProbeTest3/Pipeline.Summary.Details.csv"
+)
+# Find the first valid path
+file_path <- possible_paths[file.exists(possible_paths)][1]
+if (!is.null(file_path)) {
+  Sept_pipeSummary <- read.csv(file_path)
+} else {
+  stop("File not found in any of the expected locations.")
+}
+
+Sept_pipeSummary$Week <- as.character(Sept_pipeSummary$Week)
+ordered_Week <- c("0", "2", "4")
+Sept_pipeSummary$Week <- factor(Sept_pipeSummary$Week, levels = ordered_Week)
+
+Sept_pipeSummary <- Sept_pipeSummary[-nrow(Sept_pipeSummary), ] # Remove the undetermined, which is the last row
+
+Sept_pipeSummary$SampleID <- gsub(x = Sept_pipeSummary$SampleID, pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
+
+
+# Combine the sputum samples only 
+AllSputum_pipeSummary <- merge(my_pipeSummary %>% filter(Sample_Type == "Sputum") %>% 
+                                 mutate(SeqRun = "Nov"), 
+                               Sept_pipeSummary %>% filter(Sample_Type == "Sputum") %>% 
+                                 mutate(SeqRun = "Sept"),
+                               all = T) %>%
+  mutate(Sputum_Number = str_extract(SampleID, "S_[0-9]+")) # Regular expression (regex)
+
+
 ###########################################################
 ############ IMPORT AND PROCESS ALL TPM VALUES ############
 
