@@ -69,13 +69,69 @@ ggsave(ScatterCorr,
        width = 7, height = 5, units = "in")
 
 
+###########################################################
+######################## S_503557 #########################
+# S_503557 (Nov) and S_503557_Probe_3D_10 (Sept)
+
+Sample1 <- "S_503557"
+Sample2 <- "S_503557_Probe_3D_10"
+ScatterCorr <- multiRun_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = paste0(Sample1, " vs ", Sample2),
+       subtitle = "Log10 transformed, Pearson correlation",
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggplotly(ScatterCorr)
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "CompareAcrossRuns_Figures",
+       width = 7, height = 5, units = "in")
 
 
 
 ###########################################################
-######################## S_503557 #########################
-# Week 0
+######################## S_575533 #########################
+# S_575533_MtbrRNA (Nov) and S_575533_Probe_3A (Sept)
+
+Sample1 <- "S_575533_MtbrRNA"
+Sample2 <- "S_575533_Probe_3A"
+ScatterCorr <- multiRun_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = paste0(Sample1, " vs ", Sample2),
+       subtitle = "Log10 transformed, Pearson correlation",
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggplotly(ScatterCorr)
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "CompareAcrossRuns_Figures",
+       width = 7, height = 5, units = "in")
 
 
+###########################################################
+######################## S_250754 #########################
+# S_250754 (Nov) and S_250754_Probe_4A_50 (Sept)
 
+Sample1 <- "S_250754"
+Sample2 <- "S_250754_Probe_4A_50"
+ScatterCorr <- multiRun_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = paste0(Sample1, " vs ", Sample2),
+       subtitle = "Log10 transformed, Pearson correlation",
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggplotly(ScatterCorr)
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "CompareAcrossRuns_Figures",
+       width = 7, height = 5, units = "in")
 
