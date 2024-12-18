@@ -135,13 +135,14 @@ ggsave(Sputum_DepVsPercentReads_scatter,
 
 SputumSubset_DepVsReads_scatter <- my_pipeSummary %>% 
   filter(Sample_Type == "Sputum") %>% 
-  filter(EukrRNADep_Group != "NA") %>%
+  # filter(EukrRNADep_Group != "NA") %>%
   ggplot(aes(x = EukrRNADep, y = N_Genomic)) + 
-  geom_point(aes(color = Pooled_Set, shape = Week), size = 3, alpha = 0.8) + 
-  geom_line(aes(group = EukrRNADep_Group), linewidth = 0.2) +
+  geom_point(aes(fill = Sputum_Number, shape = Week), size = 3, alpha = 0.8) + 
+  geom_line(aes(group = Sputum_Number), linewidth = 0.2) +
+  scale_shape_manual(values = c(`0` = 21, `2` = 24, `4` = 22)) + 
+  guides(fill = guide_legend(override.aes = list(shape = 21))) +  # Adjust legend to show fill colors
   # scale_color_manual(values = c(`High_Low_THP1` = "darkorange4", `Sputum` = "#0072B2", `THP1` = "#FF7F00")) + 
-  # scale_shape_manual(values=c(1, 16)) +
-  # geom_text_repel(aes(label = Library_prep), size= 2) + 
+  # geom_text_repel(aes(label = Sputum_Number), size= 2) + 
   geom_hline(yintercept = 1000000, linetype = "dashed", alpha = 0.5) + 
   # scale_y_continuous(limits = c(500000,7000000), breaks = seq(1000000, 7000000, 1000000)) + 
   labs(title = "Eukaryotic rRNA depletion vs number reads aligned to Mtb",
@@ -161,16 +162,17 @@ ggsave(SputumSubset_DepVsReads_scatter,
 
 SputumSubset_DepVsPercentReads_scatter <- my_pipeSummary %>% 
   filter(Sample_Type == "Sputum") %>% 
-  filter(EukrRNADep_Group != "NA") %>%
+  # filter(EukrRNADep_Group != "NA") %>%
   ggplot(aes(x = EukrRNADep, y = P_Genomic)) + 
-  geom_point(aes(color = Pooled_Set, shape = Week), size = 3, alpha = 0.8) + 
-  geom_line(aes(group = EukrRNADep_Group), linewidth = 0.2) +
+  geom_point(aes(fill = Sputum_Number, shape = Week), size = 3, alpha = 0.8) + 
+  geom_line(aes(group = Sputum_Number), linewidth = 0.2) +
+  scale_shape_manual(values = c(`0` = 21, `2` = 24, `4` = 22)) + 
+  guides(fill = guide_legend(override.aes = list(shape = 21))) +  # Adjust legend to show fill colors
   # scale_color_manual(values = c(`High_Low_THP1` = "darkorange4", `Sputum` = "#0072B2", `THP1` = "#FF7F00")) + 
-  # scale_shape_manual(values=c(1, 16)) +
-  # geom_text_repel(aes(label = Library_prep), size= 2) + 
+  # geom_text_repel(aes(label = Sputum_Number), size= 2) + 
   # geom_hline(yintercept = 1000000, linetype = "dashed", alpha = 0.5) + 
   # scale_y_continuous(limits = c(500000,7000000), breaks = seq(1000000, 7000000, 1000000)) + 
-  labs(title = "Eukaryotic rRNA depletion vs Percent reads aligned to Mtb",
+  labs(title = "Eukaryotic rRNA depletion vs percent reads aligned to Mtb",
        subtitle = "Subset of matching sputum") + 
   my_plot_themes
 

@@ -74,6 +74,8 @@ my_pipeSummary <- my_pipeSummary[-nrow(my_pipeSummary), ] # Remove the undetermi
 
 my_pipeSummary$SampleID <- gsub(x = my_pipeSummary$SampleID, pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
 
+my_pipeSummary <- my_pipeSummary %>% mutate(Sputum_Number = str_extract(SampleID, "S_[0-9]+"))
+
 
 ###########################################################
 ############ IMPORT SEPT PIPELINE SUMMARY DATA ############
