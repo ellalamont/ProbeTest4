@@ -56,11 +56,30 @@ ggsave(ScatterCorr,
        width = 7, height = 5, units = "in")
 
 
+###############################################################################
+########## orginalTHP1_1e6_1_DualrRNA vs originalTHP1_1e6_6_DualrRNA ##########
 
+# Neither sample was in a pool
+# Both samples are the original THP1 that were MtbrRNA depleted by JA and Melanie
 
+# orginalTHP1_1e6_1_DualrRNA - The sample was fully library prepped for the september sequencing AND the hydridization was good 16hr
+# originalTHP1_1e6_6_DualrRNA - This sample was Half library prep done by JA in Nov, AND the hybridization was stopped then restarted
 
-
-
+Sample1 <- "orginalTHP1_1e6_1_DualrRNA"
+Sample2 <- "originalTHP1_1e6_6_DualrRNA"
+ScatterCorr <- my_tpm_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = paste0(Sample1, " vs ", Sample2),
+       subtitle = "Pearson correlation",
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "HalfFullPrep_Figures",
+       width = 7, height = 5, units = "in")
 
 
 

@@ -73,6 +73,41 @@ my_pipeSummary <- my_pipeSummary[-nrow(my_pipeSummary), ] # Remove the undetermi
 
 my_pipeSummary$SampleID <- gsub(x = my_pipeSummary$SampleID, pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
 
+
+###########################################################
+############ IMPORT SEPT PIPELINE SUMMARY DATA ############
+
+# A little complicated because I am working across two computers
+possible_paths <- c(
+  "/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Pipeline.Summary.Details.csv",
+  "/Users/snork-maiden/Documents/Micro_grad_school/Sherman_Lab/R_projects/Sputum/ProbeTest3/Pipeline.Summary.Details.csv"
+)
+# Find the first valid path
+file_path <- possible_paths[file.exists(possible_paths)][1]
+if (!is.null(file_path)) {
+  Sept_pipeSummary <- read.csv(file_path)
+} else {
+  stop("File not found in any of the expected locations.")
+}
+
+Sept_pipeSummary$Week <- as.character(Sept_pipeSummary$Week)
+ordered_Week <- c("0", "2", "4")
+Sept_pipeSummary$Week <- factor(Sept_pipeSummary$Week, levels = ordered_Week)
+
+Sept_pipeSummary <- Sept_pipeSummary[-nrow(Sept_pipeSummary), ] # Remove the undetermined, which is the last row
+
+Sept_pipeSummary$SampleID <- gsub(x = Sept_pipeSummary$SampleID, pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
+
+
+# Combine the sputum samples only 
+AllSputum_pipeSummary <- merge(my_pipeSummary %>% filter(Sample_Type == "Sputum") %>% 
+                                 mutate(SeqRun = "Nov"), 
+                               Sept_pipeSummary %>% filter(Sample_Type == "Sputum") %>% 
+                                 mutate(SeqRun = "Sept"),
+                               all = T) %>%
+  mutate(Sputum_Number = str_extract(SampleID, "S_[0-9]+")) # Regular expression (regex)
+
+
 ###########################################################
 ############ IMPORT AND PROCESS ALL TPM VALUES ############
 
@@ -143,6 +178,7 @@ orginalTHP1_1e6_2_DualrRNA_ComparedTo_originalTHP1_1e6_3_DualrRNA <- read.delim(
 orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_5_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_4_DualrRNA_vs_originalTHP1_1e6_5_DualrRNA/originalTHP1_1e6_4_DualrRNA_S25.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_6_DualrRNA_vs_originalTHP1_1e6_4_DualrRNA/originalTHP1_1e6_4_DualrRNA_S25.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_5_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_6_DualrRNA_vs_originalTHP1_1e6_5_DualrRNA/originalTHP1_1e6_5_DualrRNA_S26.MTb.Meta.JOINED.txt")
+orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_DualrRNA_vs_originalTHP1_1e6_6_DualrRNA/orginalTHP1_1e6_1_DualrRNA_S22.MTb.Meta.JOINED.txt")
 
 orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_2_MtbrRNA/orginalTHP1_1e6_1_MtbrRNA_S28.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA/orginalTHP1_1e6_1_MtbrRNA_S28.MTb.Meta.JOINED.txt")
@@ -173,6 +209,7 @@ W0.S250754_ComparedTo_W0.S250754_Probe_4A_50 <- read.delim("JOINED_BobAverages/D
 W0.S503557_ComparedTo_W0.S503557_Probe_3D_10 <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.S_503557_vs_S_503557_Probe_3D_10/S_503557_S46.MTb.Meta.JOINED.txt")
 W2.S575533_ComparedTo_W0.S575533_Probe_3A <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.S_575533_MtbrRNA_vs_S_575533_Probe_3A/S_575533_MtbrRNA_S39.MTb.Meta.JOINED.txt")
 THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25 <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.THP1_1e6_5_vs_THP1_1e6_3_Probe_3D_25/THP1_1e6_5_S45.MTb.Meta.JOINED.txt")
+THP1_1e6_3_ComparedTo_THP1_1e6_3_Probe_3D_25 <- read.delim("JOINED_BobAverages/MTb.MetaResults.THP1_1e6_3_vs_THP1_1e6_3_Probe_3D_25/THP1_1e6_3_S43.MTb.Meta.JOINED.txt")
 
 
 ###########################################################
@@ -187,6 +224,7 @@ list_dfs <- list(newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA,
                  orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_5_DualrRNA,
                  orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA,
                  orginalTHP1_1e6_5_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA, #8
+                 orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA,
                  
                  orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA,
                  orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA,
@@ -214,7 +252,8 @@ list_dfs <- list(newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA,
                  W0.S250754_ComparedTo_W0.S250754_Probe_4A_50,
                  W0.S503557_ComparedTo_W0.S503557_Probe_3D_10,
                  W2.S575533_ComparedTo_W0.S575533_Probe_3A,
-                 THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25) 
+                 THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25,
+                 THP1_1e6_3_ComparedTo_THP1_1e6_3_Probe_3D_25) 
 
 # Make a list of all the names
 df_names <- c("newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA",
@@ -226,6 +265,7 @@ df_names <- c("newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA",
               "orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_5_DualrRNA",
               "orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA",
               "orginalTHP1_1e6_5_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA", #8
+              "orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA",
               
               "orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA",
               "orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA",
@@ -253,7 +293,8 @@ df_names <- c("newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA",
               "W0.S250754_ComparedTo_W0.S250754_Probe_4A_50",
               "W0.S503557_ComparedTo_W0.S503557_Probe_3D_10",
               "W2.S575533_ComparedTo_W0.S575533_Probe_3A",
-              "THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25" #31
+              "THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25", #31
+              "THP1_1e6_3_ComparedTo_THP1_1e6_3_Probe_3D_25"
   
 )
 
