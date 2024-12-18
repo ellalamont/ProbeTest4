@@ -10,3 +10,7 @@ Mtb.Expression.Gene.Data.ReadsM.csv
 Mtb.Expression.Gene.Data.TPM.csv
 Pipeline.Summary.Details.csv
 Sputum_Correlations_Figures
+JOINED_BobAverages
+Volcano_plot_figures
+CompareAcrossRuns_Figures
+Pooling_Figures
