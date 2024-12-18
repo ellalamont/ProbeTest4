@@ -3,6 +3,7 @@
 # 12/11/24
 
 source("Import_data.R") # to get my_pipeSummary
+my_pipeSummary <- my_pipeSummary %>% mutate(Sputum_Number = str_extract(SampleID, "S_[0-9]+"))
 
 # Plot basics
 my_plot_themes <- theme_bw() +
@@ -59,9 +60,10 @@ SputumAll_DepVsGenes_scatter <- my_pipeSummary %>%
   filter(Sample_Type == "Sputum") %>% 
   pivot_longer(cols = c("AtLeast.10.Reads", "AtLeast.100.Reads"), names_to = "AtLeast.X.Reads", values_to = "Num_Genes") %>%
   ggplot(aes(x = EukrRNADep, y = Num_Genes, text = SampleID)) + 
-  geom_point(aes(shape = Week), fill = "#0072B2", size = 3, alpha = 0.8) + 
+  geom_point(aes(shape = Week, fill = Sputum_Number), color = "black", size = 3, alpha = 0.8) + 
   facet_grid(~AtLeast.X.Reads, scales = "free") + 
-  # scale_color_manual(values = c(`B` = "#E31A1C", `C` = "green4", `D` = "#6A3D9A", `F` = "maroon", `No` = "black")) + 
+  scale_fill_manual(values = c14) +  
+  guides(fill = guide_legend(override.aes = list(shape = 21))) +  # Adjust legend to show fill colors
   scale_shape_manual(values = c(`0` = 21, `2` = 24, `4` = 22)) + 
   # geom_text_repel(aes(label = Library_prep), size= 2) + 
   # scale_y_continuous(limits = c(3000,4500), breaks = seq(3000, 4500, 500)) + 
