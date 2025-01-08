@@ -80,18 +80,7 @@ my_pipeSummary <- my_pipeSummary %>% mutate(Sputum_Number = str_extract(SampleID
 ###########################################################
 ############ IMPORT SEPT PIPELINE SUMMARY DATA ############
 
-# A little complicated because I am working across two computers
-possible_paths <- c(
-  "/Users/elamont/Documents/RProjects/Sputum/ProbeTest3/Pipeline.Summary.Details.csv",
-  "/Users/snork-maiden/Documents/Micro_grad_school/Sherman_Lab/R_projects/Sputum/ProbeTest3/Pipeline.Summary.Details.csv"
-)
-# Find the first valid path
-file_path <- possible_paths[file.exists(possible_paths)][1]
-if (!is.null(file_path)) {
-  Sept_pipeSummary <- read.csv(file_path)
-} else {
-  stop("File not found in any of the expected locations.")
-}
+Sept_pipeSummary <- read.csv("ProbeTest3_Pipeline.Summary.Details.csv")
 
 Sept_pipeSummary$Week <- as.character(Sept_pipeSummary$Week)
 ordered_Week <- c("0", "2", "4")
