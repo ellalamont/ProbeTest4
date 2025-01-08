@@ -162,6 +162,20 @@ rownames(Sept_tpm) <- Sept_tpm[,1] # add the rownames
 Sept_tpm <- Sept_tpm[,-1] # Remove the old column of rownames
 
 
+# Combine the sputum samples only 
+AllSputum_tpm <- merge(my_tpm %>% select(starts_with("S_")),
+                       Sept_tpm %>% select(starts_with("S_")),
+                       by = "row.names")
+rownames(AllSputum_tpm) <- AllSputum_tpm$Row.names
+AllSputum_tpm <- AllSputum_tpm %>% select(-Row.names)
+
+
+# Grab AllSputum metadata
+AllSputum_metadata <- AllSputum_pipeSummary # %>% select(2, 14:30)
+# Adjust the metadata names so they are the same
+AllSputum_metadata$SampleID <- sub(x = AllSputum_metadata$SampleID, pattern = "_S.*", replacement = "")
+rownames(AllSputum_metadata) <- AllSputum_metadata[,1] # add the rownames
+
 
 ###########################################################
 ################## IMPORT BOBS DE DATA #################### 
