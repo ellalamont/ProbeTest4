@@ -99,6 +99,13 @@ AllSputum_pipeSummary <- merge(my_pipeSummary %>% filter(Sample_Type == "Sputum"
                                all = T) %>%
   mutate(Sputum_Number = str_extract(SampleID, "S_[0-9]+")) # Regular expression (regex)
 
+# Add a column with Hex colors, Did this manually to make sure same samples were same color
+AllSputum_pipeSummary$Colours <- c("dodgerblue2", "#E31A1C", "green4", "#FF7F00", "black",
+                                   "darkorange4", "dodgerblue2", "gold1",  "#CAB2D6", "palegreen2", 
+                                   "gray70", "#FF7F00", "#FF7F00", "maroon", "orchid1", 
+                                   "black", "black", "blue1", "darkturquoise", "darkorange4", 
+                                   "darkorange4") 
+
 
 ###########################################################
 ############ IMPORT AND PROCESS ALL TPM VALUES ############
