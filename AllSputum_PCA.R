@@ -94,4 +94,53 @@ PCA_3D
 
 
 
+###########################################################
+############## UNIQUE SPUTUM MAKE PCA #####################
+# Want a PCA of unique sputum (some samples were sequenced more than once so want to have a PCA of just unique sputum samples so none are repeated)
 
+# W0 samples: "S_250754_S47", "S_354851_DualrRNA_S17", "S_503557_S46"
+# W2 samples: "S_349942_DualrRNA_S18", "S_575533_MtbrRNA_S39"
+
+
+my_tpm_t_UniqueSputum <- my_tpm_t %>% filter(row.names(my_tpm_t2) %in% c("S_250754","S_354851_DualrRNA", "S_503557", "S_349942_DualrRNA", "S_575533_MtbrRNA"))
+
+# Remove columns that are all zero so the scale works for prcomp
+my_tpm_t2 <- my_tpm_t_UniqueSputum %>% select_if(colSums(.) != 0)
+
+# Make the actual PCA
+my_PCA <- prcomp(my_tpm_t2, scale = TRUE)
+
+# See the % Variance explained
+summary(my_PCA)
+summary_PCA <- format(round(as.data.frame(summary(my_PCA)[["importance"]]['Proportion of Variance',]) * 100, digits = 1), nsmall = 1) # format and round used to control the digits after the decimal place
+summary_PCA[1,1] # PC1 explains 53.7% of variance
+summary_PCA[2,1] # PC2 explains 27.7% of variance
+summary_PCA[3,1] # PC3 explains 9.8% of variance
+
+# MAKE PCA PLOT with GGPLOT 
+
+my_PCA_df <- as.data.frame(my_PCA$x[, 1:3]) # Extract the first 3 PCs
+my_PCA_df <- data.frame(SampleID = row.names(my_PCA_df), my_PCA_df)
+my_PCA_df <- merge(my_PCA_df, AllSputum_metadata, by = "SampleID")
+
+fig_PC1vsPC2 <- my_PCA_df %>%
+  ggplot(aes(x = PC1, y = PC2, fill = Week, shape = Week)) + 
+  # ggplot(aes(x = PC1, y = PC2, color = Sample_Type, shape = Strain, text = Replicate)) + 
+  geom_point(size = 6, alpha = 0.8) +
+  # guides(fill = guide_legend(override.aes = list(shape = c(21, 22)))) +  # Adjust legend to show fill colors
+  scale_shape_manual(values=c(`2` = 22, `0` = 21)) + 
+  # geom_text_repel(aes(label = format(N_Genomic, big.mark = ",")), size= 2.5, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
+  geom_text_repel(aes(label = Sputum_Number), size= 2.5, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
+  # scale_color_manual(values = c(`High_Low_THP1` = "darkorange4", `Sputum` = "#0072B2", `THP1` = "#FF7F00")) + 
+  labs(title = "PCA plot Unique Sputum W0 and W2 only",
+       subtitle = "All have >1M reads, all from Nov sequencing run, some dual rRNA depleted",
+       x = paste0("PC1: ", summary_PCA[1,1], "%"),
+       y = paste0("PC2: ", summary_PCA[2,1], "%")) +
+  my_plot_themes
+fig_PC1vsPC2
+ggplotly(fig_PC1vsPC2)
+
+ggsave(fig_PC1vsPC2,
+       file = "PCA_UniqueSputum_PC1vsPC2.pdf",
+       path = "PCA_Figures",
+       width = 9, height = 6, units = "in")
