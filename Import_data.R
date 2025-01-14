@@ -131,6 +131,19 @@ rownames(my_metadata) <- my_metadata[,1] # add the rownames
 # my_metadata <- my_metadata[,-1] # Remove the old column of rownames
 
 
+###########################################################
+############## IMPORT NOT SCALED TPM VALUES ###############
+
+my_tpm_NotScaled <- read.csv("Mtb.Expression.Gene.Data.TPM.csv")
+
+my_tpm_NotScaled <- my_tpm_NotScaled[,-ncol(my_tpm_NotScaled)] # remove the last column which is the Undetermined
+
+# Adjust the names so they are slightly shorter
+names(my_tpm_NotScaled) <- gsub(x = names(my_tpm_NotScaled), pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
+
+# add rownames to the tpm and metadata dataframes
+rownames(my_tpm_NotScaled) <- my_tpm_NotScaled[,1] # add the rownames
+my_tpm_NotScaled <- my_tpm_NotScaled[,-1] # Remove the old column of rownames
 
 ###########################################################
 ################ IMPORT SEPT_Seq TPM VALUES ###############
@@ -175,6 +188,24 @@ AllSputum_metadata <- AllSputum_pipeSummary # %>% select(2, 14:30)
 # Adjust the metadata names so they are the same
 AllSputum_metadata$SampleID <- sub(x = AllSputum_metadata$SampleID, pattern = "_S.*", replacement = "")
 rownames(AllSputum_metadata) <- AllSputum_metadata[,1] # add the rownames
+
+
+###########################################################
+############ IMPORT SEPT NOT SCALED TPM VALUES ############
+
+Sept_tpm_NotScaled <- read.csv("ProbeTest3_Mtb.Expression.Gene.Data.TPM.csv")
+
+Sept_tpm_NotScaled <- Sept_tpm_NotScaled[,-ncol(Sept_tpm_NotScaled)] # remove the last column which is the Undetermined
+
+# Adjust the names so they are slightly shorter
+names(Sept_tpm_NotScaled) <- gsub(x = names(Sept_tpm_NotScaled), pattern = "_S.*", replacement = "") # This regular expression removes the _S and everything after it (I think...)
+
+# add rownames to the tpm and metadata dataframes
+rownames(Sept_tpm_NotScaled) <- Sept_tpm_NotScaled[,1] # add the rownames
+Sept_tpm_NotScaled <- Sept_tpm_NotScaled[,-1] # Remove the old column of rownames
+
+
+
 
 
 ###########################################################

@@ -4,9 +4,13 @@
 
 source("Import_data.R") # to get my_tpm
 my_tpm$Gene <- rownames(my_tpm)
+my_tpm_NotScaled$Gene <- rownames(my_tpm_NotScaled)
 
 # Log10 transform the data
 my_tpm_Log10 <- my_tpm %>% 
+  mutate(across(where(is.numeric), ~ .x + 1)) %>% # Add 1 to all the values
+  mutate(across(where(is.numeric), ~ log10(.x))) # Log transform the values
+my_tpm_NotScaled_Log10 <- my_tpm_NotScaled %>% 
   mutate(across(where(is.numeric), ~ .x + 1)) %>% # Add 1 to all the values
   mutate(across(where(is.numeric), ~ log10(.x))) # Log transform the values
 
@@ -30,7 +34,7 @@ my_plot_themes <- theme_bw() +
 
 # http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2
 
-##### D
+##### D #####
  
 ###########################################################
 ################### D: LOG10 GGCORRPLOT ###################
@@ -108,7 +112,7 @@ ggsave(orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA,
 
 
 
-##### F
+##### F #####
 ###################################################################
 ######################## F: LOG10 GGCORRPLOT ######################
 # Only going to do Pearson because the number of genes is so high CLT applies and parametric tests can be used
@@ -174,6 +178,25 @@ ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5 <- my_tpm_Log10 %>%
 ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5
 ggsave(ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5,
        file = "ScatterCorr_THP1_1e6_1_vs_THP1_1e6_5.pdf",
+       path = "Pooling_Figures",
+       width = 7, height = 5, units = "in")
+
+###################################################################
+################ F: LOG10 CORRELATIONS NOT SCALED  ################
+# Want to see what looks different when the data are not scaled
+
+# F Scatter: THP1_1e6_1 vs THP1_1e6_5 NOT SCALED
+ScatterCorr_THP1_1e6_1_vs_THP1_1e6_NotScaled <- my_tpm_NotScaled_Log10 %>% 
+  ggplot(aes(x = THP1_1e6_1, y = THP1_1e6_5)) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = "Not Scaled! THP1 with 1e6 cells H37Ra Pearson correlation",
+       subtitle = "THP1_1e6_1 vs THP1_1e6_5; Full library prep",
+       x = "THP1_1e6_1 Log10(TPM)", y = "THP1_1e6_5 Log10(TPM)") + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr_THP1_1e6_1_vs_THP1_1e6_NotScaled
+ggsave(ScatterCorr_THP1_1e6_1_vs_THP1_1e6_NotScaled,
+       file = "ScatterCorr_THP1_1e6_1_vs_THP1_1e6_NotScaled.pdf",
        path = "Pooling_Figures",
        width = 7, height = 5, units = "in")
 

@@ -5,6 +5,8 @@
 source("Import_data.R") # to get my_tpm and Sept_tpm
 my_tpm$Gene <- rownames(my_tpm)
 Sept_tpm$Gene <- rownames(Sept_tpm)
+my_tpm_NotScaled$Gene <- rownames(my_tpm_NotScaled)
+Sept_tpm_NotScaled$Gene <- rownames(Sept_tpm_NotScaled)
 
 # Plot basics
 my_plot_themes <- theme_bw() +
@@ -132,6 +134,79 @@ ScatterCorr
 ggplotly(ScatterCorr)
 ggsave(ScatterCorr,
        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       path = "CompareAcrossRuns_Figures",
+       width = 7, height = 5, units = "in")
+
+###########################################################
+####################### NOT SCALED ########################
+# Compare the same samples that are not scaled
+
+# Make a new merged DF
+my_tpm_NotScaled_RunSubset <- my_tpm_NotScaled %>%
+  select(S_575533_MtbrRNA, S_687338_MtbrRNA, S_503557, S_250754, THP1_1e6_3, Gene)
+Sept_tpm_NotScaled_RunSubset <- Sept_tpm_NotScaled %>% 
+  select(S_575533_Probe_3A, S_687338_Probe_4A_100, S_503557_Probe_3D_10, S_250754_Probe_4A_50, THP1_1e6_3_Probe_3D_25, Gene)
+
+# Merge the dataframes
+multiRun_tpm_NotScaled <- merge(my_tpm_NotScaled_RunSubset, Sept_tpm_NotScaled_RunSubset, by = "Gene", all = T)
+
+# Log10 transform the data
+multiRun_tpm_NotScaled_Log10 <- multiRun_tpm_NotScaled %>% 
+  mutate(across(where(is.numeric), ~ .x + 1)) %>% # Add 1 to all the values
+  mutate(across(where(is.numeric), ~ log10(.x))) # Log transform the values
+
+# THP1_1e6_3 vs THP1_1e6_3_Probe_3D_25 
+Sample1 <- "THP1_1e6_3"
+Sample2 <- "THP1_1e6_3_Probe_3D_25"
+ScatterCorr <- multiRun_tpm_NotScaled_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = paste0(Sample1, " vs ", Sample2),
+       subtitle = "Not Scaled! Log10 transformed, Pearson correlation",
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggplotly(ScatterCorr)
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.pdf"),
+       path = "CompareAcrossRuns_Figures",
+       width = 7, height = 5, units = "in")
+
+# S_503557 (Nov) and S_503557_Probe_3D_10 (Sept)
+Sample1 <- "S_503557"
+Sample2 <- "S_503557_Probe_3D_10"
+ScatterCorr <- multiRun_tpm_NotScaled_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = paste0(Sample1, " vs ", Sample2),
+       subtitle = "Not Scaled! Log10 transformed, Pearson correlation",
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggplotly(ScatterCorr)
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.pdf"),
+       path = "CompareAcrossRuns_Figures",
+       width = 7, height = 5, units = "in")
+
+
+# S_575533_MtbrRNA (Nov) and S_575533_Probe_3A (Sept)
+Sample1 <- "S_575533_MtbrRNA"
+Sample2 <- "S_575533_Probe_3A"
+ScatterCorr <- multiRun_tpm_NotScaled_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  labs(title = paste0(Sample1, " vs ", Sample2),
+       subtitle = "Not Scaled! Log10 transformed, Pearson correlation",
+       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggplotly(ScatterCorr)
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.pdf"),
        path = "CompareAcrossRuns_Figures",
        width = 7, height = 5, units = "in")
 
