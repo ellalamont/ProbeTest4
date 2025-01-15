@@ -10,8 +10,8 @@ source("Import_data.R") # to get AllSputum_tpm and AllSputum_metadata
 # Plot basics
 my_plot_themes <- theme_bw() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(legend.position = "right",legend.text=element_text(size=10),
-        legend.title = element_text(size = 10),
+  theme(legend.position = "right",legend.text=element_text(size=14),
+        legend.title = element_text(size = 14),
         plot.title = element_text(size=10), 
         axis.title.x = element_text(size=14), 
         axis.text.x = element_text(angle = 0, size=14, vjust=0, hjust=0.5),
@@ -126,11 +126,12 @@ my_PCA_df <- merge(my_PCA_df, AllSputum_metadata, by = "SampleID")
 fig_PC1vsPC2 <- my_PCA_df %>%
   ggplot(aes(x = PC1, y = PC2, fill = Week, shape = Week)) + 
   # ggplot(aes(x = PC1, y = PC2, color = Sample_Type, shape = Strain, text = Replicate)) + 
-  geom_point(size = 6, alpha = 0.8) +
-  # guides(fill = guide_legend(override.aes = list(shape = c(21, 22)))) +  # Adjust legend to show fill colors
-  scale_shape_manual(values=c(`2` = 22, `0` = 21)) + 
-  # geom_text_repel(aes(label = format(N_Genomic, big.mark = ",")), size= 2.5, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
-  geom_text_repel(aes(label = Sputum_Number), size= 2.5, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
+  geom_point(size = 6, alpha = 0.8, stroke = 0.8) +
+  scale_fill_manual(values=c(`0` = "#0072B2", `2` = "#E66900", `4`= "#009E73")) +  
+  # guides(fill = guide_legend(override.aes = list(shape = 21))) +  # Adjust legend to show fill colors
+  scale_shape_manual(values=c(`0` = 21, `2` = 22, `4`= 23)) + 
+  
+  # geom_text_repel(aes(label = Sputum_Number), size= 2.5, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
   # scale_color_manual(values = c(`High_Low_THP1` = "darkorange4", `Sputum` = "#0072B2", `THP1` = "#FF7F00")) + 
   labs(title = "PCA plot Unique Sputum W0 and W2 only",
        subtitle = "All have >1M reads, all from Nov sequencing run, some dual rRNA depleted",
@@ -141,6 +142,7 @@ fig_PC1vsPC2
 ggplotly(fig_PC1vsPC2)
 
 ggsave(fig_PC1vsPC2,
-       file = "PCA_UniqueSputum_PC1vsPC2.pdf",
+       file = "PCA_UniqueSputum_PC1vsPC2_2.pdf",
        path = "PCA_Figures",
-       width = 9, height = 6, units = "in")
+       width = 7, height = 5, units = "in")
+
