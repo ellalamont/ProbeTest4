@@ -95,6 +95,7 @@ LimitofDetect_10Genes <- LimitofDetect %>%
   ggplot(aes(x = Ra_cells2, y = AtLeast.10.Reads, text = SampleID)) + 
   geom_point(size = 6, alpha = 0.8, stroke = 0.8, fill = "#03A9F4", shape = 21) + 
   scale_y_continuous(limits = c(0,4499), breaks = seq(0, 4500, 500)) + 
+  geom_text_repel(aes(label = format(AtLeast.10.Reads, big.mark = ",")), size= 3, box.padding = 0.4, segment.color = NA) + 
   labs(title = "THP1 spiked samples # genes aligned to Mtb with at least 10 TPM",
        subtitle = NULL,
        x = "# spiked in H37Ra cells", 
@@ -104,7 +105,7 @@ LimitofDetect_10Genes <- LimitofDetect %>%
   my_plot_themes
 LimitofDetect_10Genes
 ggsave(LimitofDetect_10Genes,
-       file = "LimitofDetect_10Genes.pdf",
+       file = "LimitofDetect_10Genes_v2.pdf",
        path = "LimitofDetection",
        width = 6, height = 4, units = "in")
 

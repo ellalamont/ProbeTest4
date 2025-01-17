@@ -6,13 +6,13 @@ source("Import_data.R")
 # Plot basics
 my_plot_themes <- theme_bw() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(legend.position = "none",legend.text=element_text(size=10),
-        legend.title = element_text(size = 10),
+  theme(legend.position = "none",legend.text=element_text(size=14),
+        legend.title = element_text(size = 14),
         plot.title = element_text(size=10), 
-        axis.title.x = element_text(size=10), 
-        axis.text.x = element_text(angle = 0, size=10, vjust=1, hjust=0.5),
-        axis.title.y = element_text(size=10),
-        axis.text.y = element_text(size=10), 
+        axis.title.x = element_text(size=14), 
+        axis.text.x = element_text(angle = 0, size=14, vjust=1, hjust=0.5),
+        axis.title.y = element_text(size=14),
+        axis.text.y = element_text(size=14), 
         plot.subtitle = element_text(size=10), 
         plot.margin = margin(10, 10, 10, 20),
         panel.background = element_rect(fill='transparent'),
@@ -37,9 +37,9 @@ make_volcano_function <- function(my_df, graph_title) {
     
     # Need it this way so the colors aren't messed up by not having significant up or down
     # scale_color_manual(values = c("#00AFBB", "grey", "#bb0c00")) + 
-    scale_color_manual(values = c(`significant down` = "#00AFBB", `not significant` = "grey", `significant up` = "#bb0c00")) +
+    scale_color_manual(values = c(`significant down` = "#00AFBB", `not significant` = "grey", `significant up` = "#bb0c00")) # +
     
-    geom_text_repel(max.overlaps = 10, size = 3) # Can do geom_text_repel or geom_label_rebel
+    # geom_text_repel(max.overlaps = 10, size = 3) # Can do geom_text_repel or geom_label_rebel
   
   # Determine the max and min axes values for labeling 
   plot_build <- ggplot_build(my_volcano)
@@ -71,20 +71,20 @@ test
 
 # df_names # Remember I have this
 
-my_path <- "Volcano_plot_figures"
-
-for (i in 1:length(list_dfs_2)) {
-
-  current_df_name <- df_names[i]
-  filename <- paste0(current_df_name, ".pdf")
-
-  my_plot <- make_volcano_function(list_dfs_2[[i]], df_names[i])
-
-  ggsave(my_plot,
-         file = filename,
-         path = my_path,
-         width = 7, height = 5, units = "in")
-}
+# my_path <- "Volcano_plot_figures"
+# 
+# for (i in 1:length(list_dfs_2)) {
+# 
+#   current_df_name <- df_names[i]
+#   filename <- paste0(current_df_name, ".pdf")
+# 
+#   my_plot <- make_volcano_function(list_dfs_2[[i]], df_names[i])
+# 
+#   ggsave(my_plot,
+#          file = filename,
+#          path = my_path,
+#          width = 7, height = 5, units = "in")
+# }
 
 # Make sure to check what the warnings are... okay if they are just the geom_text_repel but make sure not data is being lost by defined axes!
 
@@ -93,13 +93,13 @@ for (i in 1:length(list_dfs_2)) {
 ############### MAKE A SINGLE VOLCANO PLOT ################
 
 my_path <- "Volcano_plot_figures"
-single_plot <- make_volcano_function(list_dfs_2[[9]], df_names[9])
+single_plot <- make_volcano_function(list_dfs_2[[29]], df_names[29])
 single_plot
 ggsave(single_plot,
-       file = paste0(df_names[9], ".pdf"),
+       file = paste0(df_names[33], "_v2.pdf"),
        path = my_path,
-       width = 7, height = 5, units = "in")
-
+       width = 6, height = 4, units = "in")
+ggplotly(single_plot)
 
 
 

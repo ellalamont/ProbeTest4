@@ -38,33 +38,33 @@ my_plot_themes <- theme_bw() +
 ###########################################################
 ############### LOOP THROUGH ALL NOV SAMPLES ##############
 
-my_path <- "All_Correlation_Scatter_Figures"
-
-for (i in 1:(length(colnames(my_tpm_Log10)) -1 -1)) { 
-  for (j in (i + 1):(length(colnames(my_tpm_Log10))-1)) {
-    if (i != j) { # Avoid comparing the same samples or repeating comparisons
-    # Access the samples
-      Sample1 <- colnames(my_tpm_Log10[i])
-      Sample2 <- colnames(my_tpm_Log10[j])
-      # cat("Comparing:", Sample1, "with", Sample2, "\n")
-      filename <- paste0(Sample1, "_ComparedTo_", Sample2, ".pdf")
-      
-      ScatterCorr <- my_tpm_Log10 %>% 
-        ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
-        geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
-        labs(title = paste0(Sample1, " vs ", Sample2),
-             subtitle = "Pearson correlation",
-             x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
-        stat_cor(method="pearson") + # add a correlation to the plot
-        my_plot_themes
-      
-      ggsave(ScatterCorr,
-             file = filename,
-             path = my_path,
-             width = 7, height = 5, units = "in")
-    }
-  }
-}
+# my_path <- "All_Correlation_Scatter_Figures"
+# 
+# for (i in 1:(length(colnames(my_tpm_Log10)) -1 -1)) { 
+#   for (j in (i + 1):(length(colnames(my_tpm_Log10))-1)) {
+#     if (i != j) { # Avoid comparing the same samples or repeating comparisons
+#     # Access the samples
+#       Sample1 <- colnames(my_tpm_Log10[i])
+#       Sample2 <- colnames(my_tpm_Log10[j])
+#       # cat("Comparing:", Sample1, "with", Sample2, "\n")
+#       filename <- paste0(Sample1, "_ComparedTo_", Sample2, ".pdf")
+#       
+#       ScatterCorr <- my_tpm_Log10 %>% 
+#         ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+#         geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+#         labs(title = paste0(Sample1, " vs ", Sample2),
+#              subtitle = "Pearson correlation",
+#              x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+#         stat_cor(method="pearson") + # add a correlation to the plot
+#         my_plot_themes
+#       
+#       ggsave(ScatterCorr,
+#              file = filename,
+#              path = my_path,
+#              width = 7, height = 5, units = "in")
+#     }
+#   }
+# }
 # This works but it obviously making a bunch that I don't need, will go through and delete, so don't rerun!!
 
 
@@ -85,11 +85,18 @@ clean_sample <- function(sample) {
 }
 
 # Assign the two parts to separate variables
-sample1 <- clean_sample(samples[1])
-sample2 <- clean_sample(samples[2])
+Sample1 <- clean_sample(samples[1])
+Sample2 <- clean_sample(samples[2])
 
-
-
+ScatterCorr <- my_tpm_Log10 %>% 
+          ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) +
+          geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+          labs(title = paste0(Sample1, " vs ", Sample2),
+               subtitle = "Pearson correlation",
+               x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) +
+          stat_cor(method="pearson") + # add a correlation to the plot
+          my_plot_themes
+ScatterCorr
 
 
 

@@ -1,4 +1,4 @@
-# Compare TPMs of samples sequenced on the Sept and Nov runs
+# Compare TPMs of samples sequenced on the Sept and Nov runs (Scatterplot)
 # E. Lamont
 # 12/11/24
 
@@ -11,13 +11,13 @@ Sept_tpm_NotScaled$Gene <- rownames(Sept_tpm_NotScaled)
 # Plot basics
 my_plot_themes <- theme_bw() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(legend.position = "right",legend.text=element_text(size=10),
+  theme(legend.position = "right",legend.text=element_text(size=14),
         legend.title = element_text(size = 12),
-        plot.title = element_text(size=10), 
-        axis.title.x = element_text(size=10), 
-        axis.text.x = element_text(angle = 0, size=10, vjust=0, hjust=0.5),
-        axis.title.y = element_text(size=10),
-        axis.text.y = element_text(size=10), 
+        plot.title = element_text(size=14), 
+        axis.title.x = element_text(size=14), 
+        axis.text.x = element_text(angle = 0, size=14, vjust=0, hjust=0.5),
+        axis.title.y = element_text(size=14),
+        axis.text.y = element_text(size=14), 
         plot.subtitle = element_text(size=9), 
         plot.margin = margin(10, 10, 10, 20),
         panel.background = element_rect(fill='transparent'),
@@ -66,9 +66,9 @@ ScatterCorr <- multiRun_tpm_Log10 %>%
 ScatterCorr
 ggplotly(ScatterCorr)
 ggsave(ScatterCorr,
-       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_v2.pdf"),
        path = "CompareAcrossRuns_Figures",
-       width = 7, height = 5, units = "in")
+       width = 6, height = 4, units = "in")
 
 
 ###########################################################
@@ -133,9 +133,9 @@ ScatterCorr <- multiRun_tpm_Log10 %>%
 ScatterCorr
 ggplotly(ScatterCorr)
 ggsave(ScatterCorr,
-       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, ".pdf"),
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_v2.pdf"),
        path = "CompareAcrossRuns_Figures",
-       width = 7, height = 5, units = "in")
+       width = 6, height = 4, units = "in")
 
 ###########################################################
 ####################### NOT SCALED ########################
