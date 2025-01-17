@@ -40,9 +40,10 @@ LimitofDetect_NumReads_Fig1 <- LimitofDetect %>%
   geom_text_repel(aes(label = format(N_Genomic, big.mark = ",")), size= 3, box.padding = 0.4, segment.color = NA) + 
   geom_hline(yintercept = 1000000, linetype = "dashed", alpha = 0.5) + 
   labs(title = "THP1 cells spiked with H37Ra",
-       subtitle = "Label is number of reads aligned to Mtb", 
+       subtitle = NULL, 
        x = "# spiked in H37Ra cells", 
        y = "# reads aligning to Mtb genome") + 
+  scale_y_continuous(limits = c(0,7000000), breaks = seq(0, 7000000, 1000000)) + 
   scale_x_continuous(trans = "log10") + 
   my_plot_themes
 LimitofDetect_NumReads_Fig1
@@ -69,6 +70,43 @@ ggsave(LimitofDetect_PercentReads_Fig1,
        width = 6, height = 4, units = "in")
 
 
+###########################################################
+########## COMPARE NUMBER OF GENES (10 OR 100) ############
+
+LimitofDetect_NumGenes1 <- LimitofDetect %>% 
+  pivot_longer(cols = c("AtLeast.10.Reads", "AtLeast.100.Reads"), names_to = "AtLeast.X.Reads", values_to = "Num_Genes") %>%
+  ggplot(aes(x = Ra_cells2, y = Num_Genes, text = SampleID)) + 
+  geom_point(size = 6, alpha = 0.8, stroke = 0.8, fill = "#03A9F4", shape = 21) + 
+  facet_grid(~AtLeast.X.Reads, scales = "free") + 
+  scale_y_continuous(limits = c(0,4499), breaks = seq(0, 4500, 500)) + 
+  labs(title = "THP1 spiked samples # genes aligned to Mtb",
+       subtitle = NULL,
+       x = "# spiked in H37Ra cells", 
+       y = "Number of genes") + 
+  scale_x_continuous(trans = "log10") + 
+  my_plot_themes
+LimitofDetect_NumGenes1
+ggsave(LimitofDetect_NumGenes1,
+       file = "LimitofDetect_NumGenes1.pdf",
+       path = "LimitofDetection",
+       width = 6, height = 4, units = "in")
+
+LimitofDetect_10Genes <- LimitofDetect %>% 
+  ggplot(aes(x = Ra_cells2, y = AtLeast.10.Reads, text = SampleID)) + 
+  geom_point(size = 6, alpha = 0.8, stroke = 0.8, fill = "#03A9F4", shape = 21) + 
+  scale_y_continuous(limits = c(0,4499), breaks = seq(0, 4500, 500)) + 
+  labs(title = "THP1 spiked samples # genes aligned to Mtb with at least 10 TPM",
+       subtitle = NULL,
+       x = "# spiked in H37Ra cells", 
+       y = "# genes with at least 10 reads") + 
+  geom_hline(yintercept = 4499/2, linetype = "dashed", alpha = 0.5) + 
+  scale_x_continuous(trans = "log10") + 
+  my_plot_themes
+LimitofDetect_10Genes
+ggsave(LimitofDetect_10Genes,
+       file = "LimitofDetect_10Genes.pdf",
+       path = "LimitofDetection",
+       width = 6, height = 4, units = "in")
 
 
 

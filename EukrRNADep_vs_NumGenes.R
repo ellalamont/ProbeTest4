@@ -54,7 +54,6 @@ ggsave(THP1_1e6_DepVsGenes_scatter,
 
 ###########################################################
 ################ NUMBER GENES SPUTUM ALL ##################
-# Looking at all the 1e6 THP1s, should be technical replicates of each other
 
 SputumAll_DepVsGenes_scatter <- my_pipeSummary %>% 
   filter(Sample_Type == "Sputum") %>% 

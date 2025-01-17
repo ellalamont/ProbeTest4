@@ -99,16 +99,16 @@ WeekvsReads_Unique_sputum2 <- AllSputum_pipeSummary %>%
   geom_hline(yintercept = 1000000, linetype = "dashed", alpha = 0.5) + 
   scale_y_continuous(limits = c(0,5500000), breaks = seq(0, 5500000, 1000000)) +
   labs(title = "Unique Sputum: Week vs number reads aligned to Mtb",
-       subtitle = "Label is number of reads aligned to Mtb", 
+       subtitle = NULL, 
        x = "Weeks after start of antibiotics", 
        y = "# reads aligning to Mtb genome") + 
   my_plot_themes
 WeekvsReads_Unique_sputum2
 # ggplotly(WeekvsReads_sputum2)
 ggsave(WeekvsReads_Unique_sputum2,
-       file = "WeekvsReads_UniqueSputum2.pdf",
+       file = "WeekvsReads_UniqueSputum3.pdf",
        path = "AllSputum_Figures",
-       width = 7, height = 5, units = "in")
+       width = 6, height = 4, units = "in")
 
 # P_GENOMIC vs Week
 WeekvsPercent_Unique_sputum1 <- AllSputum_pipeSummary %>% 
