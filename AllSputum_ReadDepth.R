@@ -22,6 +22,25 @@ my_plot_themes <- theme_bw() +
         legend.box.background = element_blank()
   )
 
+my_plot_themes_thumbnail <- theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(legend.position = "none", legend.text=element_text(size=7),
+        legend.title = element_text(size = 7),
+        plot.title = element_text(size=7), 
+        axis.title.x = element_text(size=7), 
+        axis.text.x = element_text(angle = 0, size=7, vjust=0, hjust=0.5),
+        axis.title.y = element_text(size=7),
+        axis.text.y = element_text(size=7), 
+        plot.subtitle = element_text(size=7), 
+        plot.margin = margin(10, 10, 10, 20),
+        panel.background = element_rect(fill='transparent'),
+        plot.background = element_rect(fill='transparent', color=NA),
+        legend.background = element_rect(fill='transparent'),
+        legend.box.background = element_blank()
+  )
+
+
+
 
 ###########################################################
 ################### N_GENOMIC vs WEEK #####################
@@ -90,12 +109,12 @@ WeekvsReads_Unique_sputum2 <- AllSputum_pipeSummary %>%
                          "S_349942_DualrRNA", "S_575533_MtbrRNA", "S_349942_DualrRNA", "S_577207_DualrRNA", 
                          "S_351946_Probe_4A_100", "S_575540_DualrRNA", "S_687338_Probe_4A_100")) %>% 
   ggplot(aes(x = Week, y = N_Genomic)) + 
-  # geom_point(aes(shape = SeqRun), fill = "#0072B2", size = 6, alpha = 0.7, stroke = 0.8, color = "black", shape = 21) + # Used for 1
   geom_point(aes(fill = Week, shape = Week), size = 6, alpha = 0.8, stroke = 0.8, color = "black") + 
+  # geom_point(aes(fill = Week, shape = Week), size = 3, alpha = 0.8, stroke = 0.5, color = "black") + # For thumbnail
   scale_fill_manual(values=c(`0` = "#0072B2", `2` = "#E66900", `4`= "#009E73")) +  
   # guides(fill = guide_legend(override.aes = list(shape = 21))) +  # Adjust legend to show fill colors
   scale_shape_manual(values=c(`0` = 21, `2` = 22, `4`= 23)) + 
-  geom_text_repel(aes(label = format(N_Genomic, big.mark = ",")), size= 3, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
+  # geom_text_repel(aes(label = format(N_Genomic, big.mark = ",")), size= 3, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
   geom_hline(yintercept = 1000000, linetype = "dashed", alpha = 0.5) + 
   scale_y_continuous(limits = c(0,5500000), breaks = seq(0, 5500000, 1000000)) +
   labs(title = "Unique Sputum: Week vs number reads aligned to Mtb",
@@ -103,12 +122,20 @@ WeekvsReads_Unique_sputum2 <- AllSputum_pipeSummary %>%
        x = "Weeks after start of antibiotics", 
        y = "# reads aligning to Mtb genome") + 
   my_plot_themes
+  # my_plot_themes_thumbnail
 WeekvsReads_Unique_sputum2
 # ggplotly(WeekvsReads_sputum2)
 ggsave(WeekvsReads_Unique_sputum2,
        file = "WeekvsReads_UniqueSputum3.pdf",
        path = "AllSputum_Figures",
        width = 6, height = 4, units = "in")
+
+# Save a thumbnail
+ggsave(WeekvsReads_Unique_sputum2,
+       file = "WeekvsReads_UniqueSputum3_thumbnail.pdf",
+       path = "AllSputum_Figures",
+       width = 3, height = 2, units = "in")
+
 
 # P_GENOMIC vs Week
 WeekvsPercent_Unique_sputum1 <- AllSputum_pipeSummary %>% 
