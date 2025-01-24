@@ -64,6 +64,7 @@ ggsave(UniqueSputum_NumGenes1,
 UniqueSputum_10Genes <- UniqueSputum_pipeSummary %>% 
   ggplot(aes(x = Week, y = AtLeast.10.Reads, text = SampleID)) + 
   geom_point(aes(fill = Week, shape = Week), size = 6, alpha = 0.8, stroke = 0.8, color = "black") + 
+  geom_text_repel(aes(label = format(AtLeast.10.Reads, big.mark = ",")), size= 2.5, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
   scale_fill_manual(values=c(`0` = "#0072B2", `2` = "#E66900", `4`= "#009E73")) +  
   scale_shape_manual(values=c(`0` = 21, `2` = 22, `4`= 23)) + 
   scale_y_continuous(limits = c(0,4499), breaks = seq(0, 4500, 500)) + 
@@ -75,7 +76,7 @@ UniqueSputum_10Genes <- UniqueSputum_pipeSummary %>%
   my_plot_themes
 UniqueSputum_10Genes
 ggsave(UniqueSputum_10Genes,
-       file = "UniqueSputum_10Genes.pdf",
+       file = "UniqueSputum_10Genes_v2.pdf",
        path = "AllSputum_Figures",
        width = 6, height = 4, units = "in")
 
