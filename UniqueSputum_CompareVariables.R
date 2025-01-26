@@ -180,10 +180,14 @@ ggsave(mRNAVsReads_sputum,
 
 
 
+###########################################################
+######### MULTIPLE LINEAR REGRESSION TTD AND CT ###########
 
+model  <- lm(N_Genomic ~ ttd + ct, data = UniqueSputum_pipeSummary)
+summary(model)
 
-
-
+# model  <- lm(N_Genomic ~ ttd, data = UniqueSputum_pipeSummary)
+# summary(model)
 
 
 
