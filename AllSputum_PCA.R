@@ -151,11 +151,11 @@ ggsave(fig_PC1vsPC2,
 # Want a PCA of unique sputum (some samples were sequenced more than once so want to have a PCA of just unique sputum samples so none are repeated)
 # Include the Week 4 samples
 
-# W0 samples: "S_250754_S47", "S_354851_DualrRNA_S17", "S_503557_S46"
-# W2 samples: "S_349942_DualrRNA_S18", "S_575533_MtbrRNA_S39"
+# W0 samples: "S_250754_S47", "S_354851_DualrRNA", "S_503557",, "S_503917_DualrRNA"
+# W2 samples: "S_349942_DualrRNA_S18", "S_575533_MtbrRNA_S39", "S_349942_DualrRNA", "S_577207_DualrRNA"
 # W4 samples: "S_351946_Probe_4A_100", "S_575540_DualrRNA", "S_687338_Probe_4A_100"
 
-my_tpm_t_UniqueSputum <- my_tpm_t %>% filter(row.names(my_tpm_t2) %in% c("S_250754","S_354851_DualrRNA", "S_503557", "S_349942_DualrRNA", "S_575533_MtbrRNA", "S_351946_Probe_4A_100", "S_575540_DualrRNA", "S_687338_Probe_4A_100"))
+my_tpm_t_UniqueSputum <- my_tpm_t %>% filter(row.names(my_tpm_t) %in% c("S_250754","S_354851_DualrRNA", "S_503557", "S_503917_DualrRNA", "S_349942_DualrRNA", "S_575533_MtbrRNA",  "S_349942_DualrRNA", "S_577207_DualrRNA", "S_575533_MtbrRNA", "S_351946_Probe_4A_100", "S_575540_DualrRNA", "S_687338_Probe_4A_100"))
 
 # Remove columns that are all zero so the scale works for prcomp
 my_tpm_t2 <- my_tpm_t_UniqueSputum %>% select_if(colSums(.) != 0)
