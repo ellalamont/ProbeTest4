@@ -118,7 +118,6 @@ PCA_3D
 # W0 samples: "S_250754_S47", "S_354851_DualrRNA_S17", "S_503557_S46"
 # W2 samples: "S_349942_DualrRNA_S18", "S_575533_MtbrRNA_S39"
 
-
 my_tpm_t_UniqueSputum <- my_tpm_t %>% filter(row.names(my_tpm_t2) %in% c("S_250754","S_354851_DualrRNA", "S_503557", "S_349942_DualrRNA", "S_575533_MtbrRNA"))
 
 # Remove columns that are all zero so the scale works for prcomp
@@ -126,6 +125,9 @@ my_tpm_t2 <- my_tpm_t_UniqueSputum %>% select_if(colSums(.) != 0)
 
 # Make the actual PCA
 my_PCA <- prcomp(my_tpm_t2, scale = TRUE)
+
+# Check out what genes are the most different
+my_PCA[["scale"]] %>% sort(decreasing = T)
 
 # See the % Variance explained
 summary(my_PCA)
@@ -151,7 +153,7 @@ fig_PC1vsPC2 <- my_PCA_df %>%
   # geom_text_repel(aes(label = Sputum_Number), size= 2.5, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
   # scale_color_manual(values = c(`High_Low_THP1` = "darkorange4", `Sputum` = "#0072B2", `THP1` = "#FF7F00")) + 
   labs(title = "PCA plot Unique Sputum W0 and W2 only",
-       subtitle = "All have >1M reads, all from Nov sequencing run, some dual rRNA depleted",
+       subtitle = NULL,
        x = paste0("PC1: ", summary_PCA[1,1], "%"),
        y = paste0("PC2: ", summary_PCA[2,1], "%")) +
   my_plot_themes
@@ -159,9 +161,9 @@ fig_PC1vsPC2
 # ggplotly(fig_PC1vsPC2)
 
 ggsave(fig_PC1vsPC2,
-       file = "PCA_UniqueSputum_PC1vsPC2_2.pdf",
+       file = "PCA_UniqueSputum_PC1vsPC2_3.pdf",
        path = "PCA_Figures",
-       width = 7, height = 5, units = "in")
+       width = 6, height = 4, units = "in")
 
 ###########################################################
 ######### UNIQUE SPUTUM WITH W4 MAKE PCA ##################
