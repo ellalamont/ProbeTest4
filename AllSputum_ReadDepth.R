@@ -96,7 +96,7 @@ ggsave(WeekvsPercent_sputum1,
 ################### ALL UNIQUE SPUTUM #####################
 
 # W0 samples: "S_250754_S47", "S_354851_DualrRNA", "S_503557",, "S_503917_DualrRNA"
-# W2 samples: "S_349942_DualrRNA_S18", "S_575533_MtbrRNA_S39", "S_349942_DualrRNA", "S_577207_DualrRNA"
+# W2 samples: "S_575533_MtbrRNA_S39", "S_349942_DualrRNA", "S_577207_DualrRNA"
 # W4 samples: "S_351946_Probe_4A_100", "S_575540_DualrRNA", "S_687338_Probe_4A_100"
 
 # Stop scientific notation
@@ -106,7 +106,7 @@ options(scipen = 0) # To revert back to default
 # N_GENOMIC vs Week
 WeekvsReads_Unique_sputum2 <- AllSputum_pipeSummary %>% 
   filter(SampleID %in% c("S_250754", "S_354851_DualrRNA", "S_503557", "S_503917_DualrRNA", 
-                         "S_349942_DualrRNA", "S_575533_MtbrRNA", "S_349942_DualrRNA", "S_577207_DualrRNA", 
+                         "S_575533_MtbrRNA", "S_349942_DualrRNA", "S_577207_DualrRNA", 
                          "S_351946_Probe_4A_100", "S_575540_DualrRNA", "S_687338_Probe_4A_100")) %>% 
   ggplot(aes(x = Week, y = N_Genomic)) + 
   geom_point(aes(fill = Week, shape = Week), size = 6, alpha = 0.8, stroke = 0.8, color = "black") + 
