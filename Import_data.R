@@ -183,6 +183,7 @@ AllSputum_tpm <- merge(my_tpm %>% select(starts_with("S_")),
 rownames(AllSputum_tpm) <- AllSputum_tpm$Row.names
 AllSputum_tpm <- AllSputum_tpm %>% select(-Row.names)
 
+# write.csv(AllSputum_tpm, "AllSputum_tpm.csv")
 
 # Grab AllSputum metadata
 AllSputum_metadata <- AllSputum_pipeSummary # %>% select(2, 14:30)

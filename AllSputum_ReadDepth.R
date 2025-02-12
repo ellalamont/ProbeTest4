@@ -114,7 +114,7 @@ WeekvsReads_Unique_sputum2 <- AllSputum_pipeSummary %>%
   scale_fill_manual(values=c(`0` = "#0072B2", `2` = "#E66900", `4`= "#009E73")) +  
   # guides(fill = guide_legend(override.aes = list(shape = 21))) +  # Adjust legend to show fill colors
   scale_shape_manual(values=c(`0` = 21, `2` = 22, `4`= 23)) + 
-  # geom_text_repel(aes(label = format(N_Genomic, big.mark = ",")), size= 3, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
+  geom_text_repel(aes(label = format(N_Genomic, big.mark = ",")), size= 3, box.padding = 0.4, segment.color = NA, max.overlaps = Inf) + 
   geom_hline(yintercept = 1000000, linetype = "dashed", alpha = 0.5) + 
   scale_y_continuous(limits = c(0,5500000), breaks = seq(0, 5500000, 1000000)) +
   labs(title = "Unique Sputum: Week vs number reads aligned to Mtb",
