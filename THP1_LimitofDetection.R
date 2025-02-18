@@ -4,11 +4,9 @@
 
 source("Import_data.R") # to get my_pipeSummary
 
-<<<<<<< HEAD
+
 # Only looking at the not pooled samples because it didn't work well when I pooled the high and low concentration samples together
 
-=======
->>>>>>> 70c7c3568c9a0e3900efb0d04ffd6481730263b8
 # Plot basics
 my_plot_themes <- theme_bw() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
@@ -27,7 +25,7 @@ my_plot_themes <- theme_bw() +
         legend.box.background = element_blank()
   )
 
-<<<<<<< HEAD
+
 ###########################################################
 ############## FILTER JUST THE SAMPLES I WANT #############
 
@@ -115,8 +113,8 @@ ggsave(LimitofDetect_10Genes,
 
 
 
-=======
+
 
 ###########################################################
 ############ SCATTER: CELL NUMBER VS N_GENOMIC ############
->>>>>>> 70c7c3568c9a0e3900efb0d04ffd6481730263b8
+
