@@ -29,5 +29,11 @@ LimitofDetection
 =======
 Pipeline.Summary.Details.xlsx
 >>>>>>> 70c7c3568c9a0e3900efb0d04ffd6481730263b8
+<<<<<<< HEAD
 Pulldown.Enrichment.FinalScaleFactor.csv
 Pulldown.Enrichment.FinalScaleFactor.txt
+=======
+AllSputum_tpm.csv
+AllSputum_tpm.xlsx
+ProbeTest3_Mtb.Expression.Gene.Data.SCALED.TPM.csv
+>>>>>>> a6899764b18f0dc8201a2a1089bf7fdb6ad9dbb2
