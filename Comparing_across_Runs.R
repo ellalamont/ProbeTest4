@@ -26,6 +26,24 @@ my_plot_themes <- theme_bw() +
         legend.box.background = element_blank()
   )
 
+poster_plot_themes <- theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(legend.position = "right",legend.text=element_text(size=14),
+        legend.title = element_text(size = 14),
+        plot.title = element_text(size=10), 
+        axis.title.x = element_text(size=20), 
+        axis.text.x = element_text(angle = 0, size=20, vjust=0, hjust=0.5),
+        axis.title.y = element_text(size=20),
+        axis.text.y = element_text(size=20), 
+        plot.subtitle = element_text(size=9), 
+        plot.margin = margin(10, 10, 10, 20),
+        panel.background = element_rect(fill='transparent'),
+        plot.background = element_rect(fill='transparent', color=NA),
+        legend.background = element_rect(fill='transparent'),
+        legend.box.background = element_blank()
+  )
+
+
 
 ###########################################################
 ##################### NEW MERGED DF #######################
@@ -309,6 +327,24 @@ ggsave(ScatterCorr,
        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.pdf"),
        path = "CompareAcrossRuns_Figures",
        width = 7, height = 5, units = "in")
+
+# For poster
+ScatterCorr_poster <- THP1_Combined_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.55, size = 2, color = "black") +
+  geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "blue") + 
+  # geom_text(aes(label = Gene), size = 2, vjust = -0.5, hjust = 0.5, check_overlap = T) +  
+  labs(title = NULL,
+       subtitle = NULL,
+       x = paste0("Captured with probe set A Log10(TPM+1)"), y = paste0("Captured with probe set B \nLog10(TPM+1)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  poster_plot_themes
+ScatterCorr_poster
+ggsave(ScatterCorr_poster,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.pdf"),
+       path = "Poster_Figures",
+       width = 7.5, height = 4.5, units = "in")
+
 
 
 # THP1_1e6_1 vs THP1_1e6_1_Probe_3D_100
