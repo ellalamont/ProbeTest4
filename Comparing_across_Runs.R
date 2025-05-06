@@ -285,13 +285,17 @@ ScatterCorr <- multiRun_tpm_NotScaled_Log10 %>%
   geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "blue") +
   labs(title = paste0(Sample1, " vs ", Sample2),
        subtitle = "Not Scaled! Log10 transformed, Pearson correlation",
-       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+       x = paste0(Sample1, " Log10(TPM+1)"), y = paste0(Sample2, " Log10(TPM+1)")) + 
   stat_cor(method="pearson") + # add a correlation to the plot
   my_plot_themes
 ScatterCorr
 ggplotly(ScatterCorr)
 ggsave(ScatterCorr,
        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.pdf"),
+       path = "CompareAcrossRuns_Figures",
+       width = 7, height = 5, units = "in")
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.png"),
        path = "CompareAcrossRuns_Figures",
        width = 7, height = 5, units = "in")
 
