@@ -3,6 +3,12 @@
 # 12/11/24
 
 source("Import_data.R") # to get my_tpm and Sept_tpm
+
+# Stop scientific notation
+# options(scipen = 999) 
+options(scipen = 0) # To revert back to default
+
+
 my_tpm$Gene <- rownames(my_tpm)
 Sept_tpm$Gene <- rownames(Sept_tpm)
 my_tpm_NotScaled$Gene <- rownames(my_tpm_NotScaled)
@@ -19,11 +25,11 @@ my_plot_themes <- theme_bw() +
         axis.title.y = element_text(size=14),
         axis.text.y = element_text(size=14), 
         plot.subtitle = element_text(size=9), 
-        plot.margin = margin(10, 10, 10, 20),
-        panel.background = element_rect(fill='transparent'),
-        plot.background = element_rect(fill='transparent', color=NA),
-        legend.background = element_rect(fill='transparent'),
-        legend.box.background = element_blank()
+        plot.margin = margin(10, 10, 10, 20)# ,
+        # panel.background = element_rect(fill='transparent'),
+        # plot.background = element_rect(fill='transparent', color=NA),
+        # legend.background = element_rect(fill='transparent'),
+        # legend.box.background = element_blank()
   )
 
 
@@ -127,7 +133,7 @@ ScatterCorr <- multiRun_tpm_Log10 %>%
   geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
   labs(title = paste0(Sample1, " vs ", Sample2),
        subtitle = "Log10 transformed, Pearson correlation",
-       x = paste0(Sample1, " Log10(TPM)"), y = paste0(Sample2, " Log10(TPM)")) + 
+       x = paste0(Sample1, " Log10(TPM+1)"), y = paste0(Sample2, " Log10(TPM+1)")) + 
   stat_cor(method="pearson") + # add a correlation to the plot
   my_plot_themes
 ScatterCorr
