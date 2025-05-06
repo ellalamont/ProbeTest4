@@ -332,9 +332,13 @@ ScatterCorr <- THP1_Combined_Log10 %>%
   stat_cor(method="pearson") + # add a correlation to the plot
   my_plot_themes
 ScatterCorr
-ggplotly(ScatterCorr)
+# ggplotly(ScatterCorr)
 ggsave(ScatterCorr,
        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.pdf"),
+       path = "CompareAcrossRuns_Figures",
+       width = 7, height = 5, units = "in")
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.png"),
        path = "CompareAcrossRuns_Figures",
        width = 7, height = 5, units = "in")
 
