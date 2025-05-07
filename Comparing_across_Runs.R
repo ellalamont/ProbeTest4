@@ -50,7 +50,7 @@ poster_plot_themes <- theme_bw() +
   )
 
 
-
+# Commented out the SCALED 
 ###########################################################
 ##################### NEW MERGED DF #######################
 # Make a new dataframe with just the sputum samples that were run twice
@@ -298,6 +298,11 @@ ggsave(ScatterCorr,
        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.png"),
        path = "CompareAcrossRuns_Figures",
        width = 7, height = 5, units = "in")
+# ggsave(ScatterCorr,
+#        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled_v2.png"),
+#        path = "CompareAcrossRuns_Figures",
+#        width = 5, height = 5, units = "in")
+
 
 
 ###########################################################
@@ -328,7 +333,7 @@ ScatterCorr <- THP1_Combined_Log10 %>%
   # geom_text(aes(label = Gene), size = 2, vjust = -0.5, hjust = 0.5, check_overlap = T) +  
   labs(title = paste0("THP1 ProbeTest 3 vs 4: Not scaled Samples AVERAGED: ", Sample1, " vs ", Sample2),
        subtitle = "Pearson correlation; 5 samples: THP1 1e6 Ra spiked ",
-       x = paste0("Log10(TPM+1) ProbeTest4 samples averaged"), y = paste0("Log10(TPM+1) ProbeTest3 averaged")) + 
+       x = paste0("Log10(TPM+1) ProbeTest4 THP1 averaged"), y = paste0("Log10(TPM+1) ProbeTest3 THP1 averaged")) + 
   stat_cor(method="pearson") + # add a correlation to the plot
   my_plot_themes
 ScatterCorr
@@ -341,6 +346,10 @@ ggsave(ScatterCorr,
        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled.png"),
        path = "CompareAcrossRuns_Figures",
        width = 7, height = 5, units = "in")
+# ggsave(ScatterCorr,
+#        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled_v2.png"),
+#        path = "CompareAcrossRuns_Figures",
+#        width = 5, height = 5, units = "in")
 
 # For poster
 ScatterCorr_poster <- THP1_Combined_Log10 %>% 
