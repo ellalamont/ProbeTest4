@@ -49,13 +49,7 @@ poster_plot_themes <- theme_bw() +
         legend.box.background = element_blank()
   )
 
-<<<<<<< HEAD
-## COMMENTING OUT ALL THE SCALED STUFF
 
-=======
-
-# Commented out the SCALED 
->>>>>>> c6dd7668aa9775609a59f7b8af7c078b32ebb0e8
 ###########################################################
 ##################### NEW MERGED DF #######################
 # Make a new dataframe with just the sputum samples that were run twice
