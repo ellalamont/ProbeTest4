@@ -434,7 +434,7 @@ ggsave(ScatterCorr,
 # Pulled the names out by hand from the averages correlation plot
 
 # Weird extra gene cluster:
-WeirdGeneList <- c("MT3275.1","MT2726", "Rv2106", "Rv2649", "Rv3475", "Rv2355", "Rv3185", "Rv0796", "Rv3187", "Rv2279", "Rv1764", "Rv3326", "Rv2479c", "Rv1756c", "Rv3380c", "Rv2167c", "Rv1369c", "Rv2814c", "Rv2105", "Rv2648", "Rv3186", "Rv3474", "Rv2354", "Rv3184", "Rv0795", "Rv2278", "Rv1763", "Rv3325", "Rv1370c", "Rv3381c", "Rv2168c", "Rv1757c", "Rv2480c", "Rv2815c")
+WeirdGeneList <- c("MT3275.1","MT2726", "Rv2106", "Rv2649", "Rv3475", "Rv2355", "Rv3185", "Rv0796", "Rv3187", "Rv2279", "Rv1764", "Rv3326", "Rv2479c", "Rv1756c", "Rv3380c", "Rv2167c", "Rv1369c", "Rv2814c", "Rv2105", "Rv2648", "Rv3186", "Rv3474", "Rv2354", "Rv3184", "Rv0795", "Rv2278", "Rv1763", "Rv3325", "Rv1370c", "Rv3381c", "Rv2168c", "Rv1757c", "Rv2480c", "Rv2815c", "Rv2666", "Rv3023", "Rv1047", "Rv3115", "Rv1199c")
 
 # Import the scaling information
 ScalingInfo <- read.csv("Pulldown.Enrichment.FinalScaleFactor.csv")
@@ -450,3 +450,56 @@ ScalingInfo <- ScalingInfo %>%
 # These are also all transposases
 # I see this comparing all ProbeTest3 to ProbeTest4. Not about probe concentration (which I would have seen within ProbeTest3) but something to do with the different DNA probes?
 ## So maybe there is an effect of probe prep? DNA for ProbeTest4 probes has less of these transposase genes?
+
+###########################################################
+############# PLOTS WITH TRANSPOSASES MARKED ##############
+# 5/19/25
+
+# Compare the averages! 
+genes_to_color <- THP1_Combined_Log10 %>% 
+  filter(Gene %in% WeirdGeneList)
+
+Sample1 <- "ProbeTest4_Averages" # Captured
+Sample2 <- "ProbeTest3_Averages" # Not Captured
+ScatterCorr <- THP1_Combined_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  geom_point(data = genes_to_color, color = "yellow") +
+  geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "blue") + 
+  # geom_text(aes(label = Gene), size = 2, vjust = -0.5, hjust = 0.5, check_overlap = T) +  
+  labs(title = paste0("THP1 ProbeTest 3 vs 4: Not scaled Samples AVERAGED: ", Sample1, " vs ", Sample2),
+       subtitle = "Pearson correlation; 5 samples: THP1 1e6 Ra spiked ",
+       x = paste0("Log10(TPM+1) ProbeTest4 THP1 averaged"), y = paste0("Log10(TPM+1) ProbeTest3 THP1 averaged")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+ggplotly(ScatterCorr)
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled_v2_Transposases.png"),
+       path = "CompareAcrossRuns_Figures",
+       width = 5, height = 5, units = "in")
+
+
+# S_250754 (Nov) and S_250754_Probe_4A_50 (Sept)
+genes_to_color <- multiRun_tpm_NotScaled_Log10 %>% 
+  filter(Gene %in% WeirdGeneList)
+Sample1 <- "S_250754"
+Sample2 <- "S_250754_Probe_4A_50"
+ScatterCorr <- multiRun_tpm_NotScaled_Log10 %>% 
+  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+  geom_point(data = genes_to_color, color = "yellow") +
+  geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "blue") +
+  labs(title = paste0(Sample1, " vs ", Sample2),
+       subtitle = "Not Scaled! Log10 transformed, Pearson correlation",
+       x = paste0(Sample1, " Log10(TPM+1)"), y = paste0(Sample2, " Log10(TPM+1)")) + 
+  stat_cor(method="pearson") + # add a correlation to the plot
+  my_plot_themes
+ScatterCorr
+# ggplotly(ScatterCorr)
+ggsave(ScatterCorr,
+       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_NotScaled_v2_Transposases.png"),
+       path = "CompareAcrossRuns_Figures",
+       width = 5, height = 5, units = "in")
+
+
