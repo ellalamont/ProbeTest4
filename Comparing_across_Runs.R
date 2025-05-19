@@ -467,8 +467,8 @@ ScatterCorr <- THP1_Combined_Log10 %>%
   geom_point(data = genes_to_color, color = "yellow") +
   geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "blue") + 
   # geom_text(aes(label = Gene), size = 2, vjust = -0.5, hjust = 0.5, check_overlap = T) +  
-  labs(title = paste0("THP1 ProbeTest 3 vs 4: Not scaled Samples AVERAGED: ", Sample1, " vs ", Sample2),
-       subtitle = "Pearson correlation; 5 samples: THP1 1e6 Ra spiked ",
+  labs(# title = paste0("THP1 ProbeTest 3 vs 4: Not scaled Samples AVERAGED: ", Sample1, " vs ", Sample2),
+       # subtitle = "Pearson correlation; 5 samples: THP1 1e6 Ra spiked ",
        x = paste0("Log10(TPM+1) ProbeTest4 THP1 averaged"), y = paste0("Log10(TPM+1) ProbeTest3 THP1 averaged")) + 
   stat_cor(method="pearson") + # add a correlation to the plot
   my_plot_themes
@@ -490,8 +490,8 @@ ScatterCorr <- multiRun_tpm_NotScaled_Log10 %>%
   geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
   geom_point(data = genes_to_color, color = "yellow") +
   geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "blue") +
-  labs(title = paste0(Sample1, " vs ", Sample2),
-       subtitle = "Not Scaled! Log10 transformed, Pearson correlation",
+  labs(# title = paste0(Sample1, " vs ", Sample2),
+       # subtitle = "Not Scaled! Log10 transformed, Pearson correlation",
        x = paste0(Sample1, " Log10(TPM+1)"), y = paste0(Sample2, " Log10(TPM+1)")) + 
   stat_cor(method="pearson") + # add a correlation to the plot
   my_plot_themes
