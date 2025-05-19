@@ -43,7 +43,7 @@ poster_plot_themes <- theme_bw() +
         legend.box.background = element_blank()
   )
 
-
+## COMMENTING OUT ALL THE SCALED STUFF
 
 ###########################################################
 ##################### NEW MERGED DF #######################
@@ -160,40 +160,40 @@ ggsave(ScatterCorr,
 ###########################################################
 ##################### SCALED AVERAGES #####################
 
-ProbeTest4_THP1_tpm <- my_tpm %>% select(THP1_1e6_1, THP1_1e6_2, THP1_1e6_3, THP1_1e6_4, THP1_1e6_5, Gene)
-ProbeTest3_THP1_tpm <- Sept_tpm %>% select(THP1_1e6_1_Probe_3D_100, THP1_1e6_2_Probe_3D_50, THP1_1e6_3_Probe_3D_25, THP1_1e6_4_Probe_3D_10, THP1_1e6_5_Probe_1, Gene)
-
-THP1_SCALED_Combined <- inner_join(ProbeTest4_THP1_tpm, ProbeTest3_THP1_tpm, by = "Gene")
-
-THP1_SCALED_Combined_Log10 <- THP1_SCALED_Combined %>% 
-  mutate(across(where(is.numeric), ~ .x + 1)) %>% # Add 1 to all the values
-  mutate(across(where(is.numeric), ~ log10(.x))) # Log transform the values
-
-# Add average columns
-THP1_SCALED_Combined_Log10 <- THP1_SCALED_Combined_Log10 %>% mutate(
-  ProbeTest3_Averages = rowMeans(select(., c(THP1_1e6_1_Probe_3D_100, THP1_1e6_2_Probe_3D_50, THP1_1e6_3_Probe_3D_25, THP1_1e6_4_Probe_3D_10, THP1_1e6_5_Probe_1)), na.rm = TRUE),
-  ProbeTest4_Averages = rowMeans(select(., c(THP1_1e6_1, THP1_1e6_2, THP1_1e6_3, THP1_1e6_4, THP1_1e6_5)), na.rm = TRUE),
-)
-
-# Compare the averages! 
-Sample1 <- "ProbeTest4_Averages" # Captured
-Sample2 <- "ProbeTest3_Averages" # Not Captured
-ScatterCorr <- THP1_SCALED_Combined_Log10 %>% 
-  ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
-  geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
-  geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "blue") + 
-  # geom_text(aes(label = Gene), size = 2, vjust = -0.5, hjust = 0.5, check_overlap = T) +  
-  labs(title = paste0("THP1 ProbeTest 3 vs 4: Not scaled Samples AVERAGED: ", Sample1, " vs ", Sample2),
-       subtitle = "Pearson correlation; 5 samples: THP1 1e6 Ra spiked ",
-       x = paste0("SCALED Log10(TPM+1) ProbeTest4 samples averaged"), y = paste0("SCALED Log10(TPM+1) ProbeTest3 averaged")) + 
-  stat_cor(method="pearson") + # add a correlation to the plot
-  my_plot_themes
-ScatterCorr
-ggplotly(ScatterCorr)
-ggsave(ScatterCorr,
-       file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_SCALED.pdf"),
-       path = "CompareAcrossRuns_Figures",
-       width = 7, height = 5, units = "in")
+# ProbeTest4_THP1_tpm <- my_tpm %>% select(THP1_1e6_1, THP1_1e6_2, THP1_1e6_3, THP1_1e6_4, THP1_1e6_5, Gene)
+# ProbeTest3_THP1_tpm <- Sept_tpm %>% select(THP1_1e6_1_Probe_3D_100, THP1_1e6_2_Probe_3D_50, THP1_1e6_3_Probe_3D_25, THP1_1e6_4_Probe_3D_10, THP1_1e6_5_Probe_1, Gene)
+# 
+# THP1_SCALED_Combined <- inner_join(ProbeTest4_THP1_tpm, ProbeTest3_THP1_tpm, by = "Gene")
+# 
+# THP1_SCALED_Combined_Log10 <- THP1_SCALED_Combined %>% 
+#   mutate(across(where(is.numeric), ~ .x + 1)) %>% # Add 1 to all the values
+#   mutate(across(where(is.numeric), ~ log10(.x))) # Log transform the values
+# 
+# # Add average columns
+# THP1_SCALED_Combined_Log10 <- THP1_SCALED_Combined_Log10 %>% mutate(
+#   ProbeTest3_Averages = rowMeans(select(., c(THP1_1e6_1_Probe_3D_100, THP1_1e6_2_Probe_3D_50, THP1_1e6_3_Probe_3D_25, THP1_1e6_4_Probe_3D_10, THP1_1e6_5_Probe_1)), na.rm = TRUE),
+#   ProbeTest4_Averages = rowMeans(select(., c(THP1_1e6_1, THP1_1e6_2, THP1_1e6_3, THP1_1e6_4, THP1_1e6_5)), na.rm = TRUE),
+# )
+# 
+# # Compare the averages! 
+# Sample1 <- "ProbeTest4_Averages" # Captured
+# Sample2 <- "ProbeTest3_Averages" # Not Captured
+# ScatterCorr <- THP1_SCALED_Combined_Log10 %>% 
+#   ggplot(aes(x = .data[[Sample1]], y = .data[[Sample2]])) + 
+#   geom_point(aes(text = Gene), alpha = 0.8, size = 2, color = "black") +
+#   geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "blue") + 
+#   # geom_text(aes(label = Gene), size = 2, vjust = -0.5, hjust = 0.5, check_overlap = T) +  
+#   labs(title = paste0("THP1 ProbeTest 3 vs 4: Not scaled Samples AVERAGED: ", Sample1, " vs ", Sample2),
+#        subtitle = "Pearson correlation; 5 samples: THP1 1e6 Ra spiked ",
+#        x = paste0("SCALED Log10(TPM+1) ProbeTest4 samples averaged"), y = paste0("SCALED Log10(TPM+1) ProbeTest3 averaged")) + 
+#   stat_cor(method="pearson") + # add a correlation to the plot
+#   my_plot_themes
+# ScatterCorr
+# ggplotly(ScatterCorr)
+# ggsave(ScatterCorr,
+#        file = paste0("ScatterCorr_", Sample1, "_vs_", Sample2, "_SCALED.pdf"),
+#        path = "CompareAcrossRuns_Figures",
+#        width = 7, height = 5, units = "in")
 
 
 ###########################################################
