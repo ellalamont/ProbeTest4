@@ -94,10 +94,10 @@ PCA_fig <- my_PCA_df %>%
        y = paste0("PC2: ", summary_PCA[2,1], "%")) +
   my_plot_themes
 PCA_fig
-ggsave(PCA_fig,
-       file = paste0("PCA_v1.pdf"),
-       path = "HTLT_Figures",
-       width = 6, height = 5, units = "in")
+# ggsave(PCA_fig,
+#        file = paste0("PCA_v1.pdf"),
+#        path = "HTLT_Figures",
+#        width = 6, height = 5, units = "in")
 
 # 3D plot
 # https://plotly.com/r/pca-visualization/

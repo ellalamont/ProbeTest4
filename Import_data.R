@@ -219,12 +219,12 @@ newTHP1_1e5_1_DualrRNA_ComparedTo_newTHP1_1e5_2_DualrRNA <- read.delim("JOINED_B
 newTHP1_1e6_1_DualrRNA_ComparedTo_newTHP1_1e6_2_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.newTHP1_1e6_1_DualrRNA_vs_newTHP1_1e6_2_DualrRNA/newTHP1_1e6_1_DualrRNA_S15.MTb.Meta.JOINED.txt")
 
 orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_2_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.newTHP1_1e6_1_DualrRNA_vs_newTHP1_1e6_2_DualrRNA/newTHP1_1e6_1_DualrRNA_S15.MTb.Meta.JOINED.txt")
-orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_3_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_DualrRNA_vs_originalTHP1_1e6_3_DualrRNA/orginalTHP1_1e6_1_DualrRNA_S22.MTb.Meta.JOINED.txt")
+# orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_3_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_DualrRNA_vs_originalTHP1_1e6_3_DualrRNA/orginalTHP1_1e6_1_DualrRNA_S22.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_2_DualrRNA_ComparedTo_originalTHP1_1e6_3_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_2_DualrRNA_vs_originalTHP1_1e6_3_DualrRNA/originalTHP1_1e6_2_DualrRNA_S23.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_5_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_4_DualrRNA_vs_originalTHP1_1e6_5_DualrRNA/originalTHP1_1e6_4_DualrRNA_S25.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_4_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_6_DualrRNA_vs_originalTHP1_1e6_4_DualrRNA/originalTHP1_1e6_4_DualrRNA_S25.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_5_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.originalTHP1_1e6_6_DualrRNA_vs_originalTHP1_1e6_5_DualrRNA/originalTHP1_1e6_5_DualrRNA_S26.MTb.Meta.JOINED.txt")
-orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_DualrRNA_vs_originalTHP1_1e6_6_DualrRNA/orginalTHP1_1e6_1_DualrRNA_S22.MTb.Meta.JOINED.txt")
+# orginalTHP1_1e6_1_DualrRNA_ComparedTo_originalTHP1_1e6_6_DualrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_DualrRNA_vs_originalTHP1_1e6_6_DualrRNA/orginalTHP1_1e6_1_DualrRNA_S22.MTb.Meta.JOINED.txt")
 
 orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_2_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_2_MtbrRNA/orginalTHP1_1e6_1_MtbrRNA_S28.MTb.Meta.JOINED.txt")
 orginalTHP1_1e6_1_MtbrRNA_ComparedTo_orginalTHP1_1e6_3_MtbrRNA <- read.delim("JOINED_BobAverages/MTb.MetaResults.orginalTHP1_1e6_1_MtbrRNA_vs_orginalTHP1_1e6_3_MtbrRNA/orginalTHP1_1e6_1_MtbrRNA_S28.MTb.Meta.JOINED.txt")
@@ -257,7 +257,7 @@ W0.S250754_ComparedTo_W0.S250754_Probe_4A_50 <- read.delim("JOINED_BobAverages/D
 W0.S503557_ComparedTo_W0.S503557_Probe_3D_10 <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.S_503557_vs_S_503557_Probe_3D_10/S_503557_S46.MTb.Meta.JOINED.txt")
 W2.S575533_ComparedTo_W0.S575533_Probe_3A <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.S_575533_MtbrRNA_vs_S_575533_Probe_3A/S_575533_MtbrRNA_S39.MTb.Meta.JOINED.txt")
 THP1_1e6_5_ComparedTo_THP1_1e6_3_Probe_3D_25 <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.THP1_1e6_5_vs_THP1_1e6_3_Probe_3D_25/THP1_1e6_5_S45.MTb.Meta.JOINED.txt")
-THP1_1e6_3_ComparedTo_THP1_1e6_3_Probe_3D_25 <- read.delim("JOINED_BobAverages/MTb.MetaResults.THP1_1e6_3_vs_THP1_1e6_3_Probe_3D_25/THP1_1e6_3_S43.MTb.Meta.JOINED.txt")
+# THP1_1e6_3_ComparedTo_THP1_1e6_3_Probe_3D_25 <- read.delim("JOINED_BobAverages/MTb.MetaResults.THP1_1e6_3_vs_THP1_1e6_3_Probe_3D_25/THP1_1e6_3_S43.MTb.Meta.JOINED.txt")
 # Grouped sputum comparison - All but unique patients
 W0_ComparedTo_W2_AllUnique <- read.delim("JOINED_BobAverages/DE_Across_Runs/MTb.MetaResults.W0_vs_W2_AllUnique/W0.MTb.Meta.JOINED.txt")
 
